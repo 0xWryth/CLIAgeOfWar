@@ -2,13 +2,16 @@
 
 title UML - Projet C++
 
-
 class Game {
     + int turn
 }
 class Console {
-    + string* leftPanel
-    + string* rightPanel
+    - vector<string> _leftPanel
+    - vector<string> _rightPanel
+    - int getMaxChar()
+    + Console()
+    + void addToLeftPanel(const string toAppend)
+    + void addToRightPanel(const string toAppend)
     + void display()
 }
 abstract class Troup {
