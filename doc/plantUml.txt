@@ -1,0 +1,55 @@
+@startuml
+
+title UML - Projet C++
+
+
+class Game {
+    + int turn
+}
+class Console {
+    + string* leftPanel
+    + string* rightPanel
+    + void display()
+}
+abstract class Troup {
+    + int _nbPiece
+    + int _damage
+    + int** _reach
+}
+class Grid
+class GridCase {
+    + int position
+    + bool isEmpty()
+}
+class HomeCase {
+}
+abstract class Health {
+    + int _initialHealth
+    + int _currentHealth
+    + bool takeDamage
+}
+class Fantassin
+class SuperSoldier
+class Archer
+class Catalpult
+class Player {
+    + string _name
+}
+
+Troup <|-- Fantassin
+Troup <|-- SuperSoldier
+Troup <|-- Archer
+Troup <|-- Catalpult
+GridCase <|-- HomeCase
+Health <|-- Troup
+Health <|-- HomeCase
+
+Game "1" -- "1" Grid : _grid
+Game "1" -- "1" Console : _console
+Player "1" -- "1" HomeCase : _playerHome
+Grid "1"  -- "2..*" GridCase : _cases
+GridCase "1"  -- "0..1" Troup : _troup
+Player "0..1"  -- "0..*" GridCase : _playerTroups
+Player "2"  -- "1" Game : _players
+
+@enduml
