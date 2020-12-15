@@ -31,3 +31,8 @@
 *.exe
 *.out
 *.app
+
+# Jetbrains files
+.idea
+cmake-build-debug
+CMakeLists.txt
