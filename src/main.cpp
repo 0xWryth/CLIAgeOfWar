@@ -4,15 +4,15 @@
 #include "Archer.h"
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
-
     Console console = Console();
-    console.addToLeftPanel("Hey my name is Lucas");
-    console.addToLeftPanel("I'm 19");
-    console.addToLeftPanel("Currently studying at Polytech Paris-Saclay");
+    console.addToPanel("Hello World", Panel::Top);
 
-    console.addToRightPanel("GP: 1");
-    console.addToRightPanel("Hmm.........");
+    console.addToPanel("Hey my name is Lucas", Panel::Left);
+    console.addToPanel("I'm 19", Panel::Left);
+    console.addToPanel("Currently studying at Polytech Paris-Saclay", Panel::Left);
+
+    console.addToPanel("GP: 1", Panel::Right);
+    console.addToPanel("Hmm.........", Panel::Right);
 
     console.display();
 

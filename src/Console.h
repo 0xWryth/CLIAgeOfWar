@@ -3,15 +3,15 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
+#include "Panel.h"
 
 class Console {
-    std::vector<std::string> _leftPanel;
-    std::vector<std::string> _rightPanel;
+    std::map<Panel,std::vector<std::string>> _panels;
     int getMaxChar();
 public:
     Console();
-    void addToLeftPanel(const std::string toAppend);
-    void addToRightPanel(const std::string toAppend);
+    void addToPanel(const std::string toAppend, Panel position);
     void display();
     void clear();
     std::string prompt(std::string message);
