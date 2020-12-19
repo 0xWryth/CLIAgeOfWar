@@ -3,22 +3,27 @@
 title UML - Projet C++
 
 class Game {
-    + int turn
-    - Console console
+    - int _maxTurnLimit
+    - int _earnings
+    - string _consoleHeader
+    - void initializeGame()
+    - void displayPlayer()
+    + Game(int gridSize, int maxTurnLimit, int earnings)
+    + void turn()
 }
 class Console {
-    - vector<string> _leftPanel
-    - vector<string> _rightPanel
+    - map<Panel, vector<string>> _panels
     - int getMaxChar()
     + Console()
-    + void addToLeftPanel(const string toAppend)
-    + void addToRightPanel(const string toAppend)
+    + void addToPanel(string toAppend, Panel position)
     + void display()
+    + void clear()
+    + string prompt(string message)
 }
 abstract class Troup {
-    + int _nbPiece
-    + int _damage
-    + int** _reach
+    - int _nbPiece
+    - int _damage
+    - int** _reach
 }
 class Grid
 class GridCase {
@@ -28,16 +33,27 @@ class GridCase {
 class HomeCase {
 }
 abstract class Health {
-    + int _initialHealth
-    + int _currentHealth
-    + bool takeDamage
+    - int _initialHealth
+    - int _currentHealth
 }
 class Fantassin
 class SuperSoldier
 class Archer
 class Catalpult
 class Player {
-    + string _name
+    - string _playerName
+    - int _playerId
+    - int _coins
+    - {static} int _playerNumber
+    + Player()
+    + string displayStr()
+    + void initiliaze(Console console)
+}
+enum Panel {
+  Top
+  Left
+  Right
+  Bottom
 }
 
 Troup <|-- Fantassin
