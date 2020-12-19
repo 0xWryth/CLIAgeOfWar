@@ -5,7 +5,7 @@ SRC_DIR=./src/
 OUT_DIR=./out/
 OBJ_DIR=./obj/
 # Please include bellow every generated .o files
-O=$(OBJ_DIR)$(NAME).o $(OBJ_DIR)Console.o
+O=$(OBJ_DIR)$(NAME).o $(OBJ_DIR)Console.o $(OBJ_DIR)Player.o
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	$(CXX) $(CXXFLAGS) $< -c -o $@

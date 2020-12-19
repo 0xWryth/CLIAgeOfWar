@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Console.h"
+#include "Player.h"
+#include "Archer.h"
 
 int main() {
     std::cout << "Hello World!" << std::endl;
@@ -13,6 +15,11 @@ int main() {
     console.addToRightPanel("Hmm.........");
 
     console.display();
+
+    console.clear();
+
+    Player p = Player();
+    p.display();
 
     return 0;
 }

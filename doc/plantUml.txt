@@ -4,6 +4,7 @@ title UML - Projet C++
 
 class Game {
     + int turn
+    - Console console
 }
 class Console {
     - vector<string> _leftPanel

@@ -56,3 +56,17 @@ Console::Console() {
     this->_leftPanel = std::vector<std::string>(0);
     this->_rightPanel = std::vector<std::string>(0);
 }
+
+void Console::clear() {
+    this->_leftPanel.clear();
+    this->_rightPanel.clear();
+}
+
+std::string Console::prompt(std::string message) {
+    std::cout << message << std::endl;
+
+    std::string res;
+    std::cin >> res;
+
+    return res;
+}

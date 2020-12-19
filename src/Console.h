@@ -13,6 +13,8 @@ public:
     void addToLeftPanel(const std::string toAppend);
     void addToRightPanel(const std::string toAppend);
     void display();
+    void clear();
+    std::string prompt(std::string message);
 };
 
 
