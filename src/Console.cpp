@@ -1,11 +1,11 @@
 #include "Console.h"
 
-int Console::getMaxChar() {
-    int leftSize = this->_panels[Panel::Left].size();
+int Console::getMaxChar() const {
+    int leftSize = this->_panels.at(Panel::Left).size();
     int maxChar = 0;
 
     for (auto i = 0; i < leftSize; ++i) {
-        auto s = this->_panels[Panel::Left][i];
+        auto s = this->_panels.at(Panel::Left)[i];
         int le = s.length();
         if (le > maxChar) {
             maxChar = le;
@@ -15,14 +15,17 @@ int Console::getMaxChar() {
     return maxChar;
 }
 
-void Console::display() {
-    auto topSize = this->_panels[Panel::Top].size();
+void Console::display() const {
+    std::cout << "\033[2J\033[1;1H";
+
+    auto topSize = this->_panels.at(Panel::Top).size();
     for (long unsigned int i = 0; i < topSize; ++i) {
-        std::cout << this->_panels[Panel::Top][i] << std::endl;
-    } 
+        std::cout << this->_panels.at(Panel::Top)[i] << std::endl;
+    }
+    std::cout << std::endl;
     
-    auto leftSize = this->_panels[Panel::Left].size();
-    auto rightSize = this->_panels[Panel::Right].size();
+    auto leftSize = this->_panels.at(Panel::Left).size();
+    auto rightSize = this->_panels.at(Panel::Right).size();
 
     auto const maxChar = this->getMaxChar();
 
@@ -35,7 +38,7 @@ void Console::display() {
         std::string right = "";
 
         if (i < leftSize) {
-            left += this->_panels[Panel::Left][i];
+            left += this->_panels.at(Panel::Left)[i];
             auto spaceNeeded = maxChar - left.length();
             left += std::string(spaceNeeded, ' ');
         }
@@ -43,15 +46,15 @@ void Console::display() {
             left += std::string(maxChar, ' ');
         }
         if (i < rightSize) {
-            right += this->_panels[Panel::Right][i];
+            right += this->_panels.at(Panel::Right)[i];
         }
         
         std::cout << left << std::string(separatorDist, ' ') << right << std::endl;
     }
 
-    auto bottomSize = this->_panels[Panel::Bottom].size();
+    auto bottomSize = this->_panels.at(Panel::Bottom).size();
     for (long unsigned int i = 0; i < bottomSize; ++i) {
-        std::cout << this->_panels[Panel::Bottom][i] << std::endl;
+        std::cout << this->_panels.at(Panel::Bottom)[i] << std::endl;
     }
 }
 
@@ -67,7 +70,7 @@ void Console::clear() {
     }
 }
 
-std::string Console::prompt(std::string message) {
+std::string Console::prompt(std::string message) const {
     std::cout << message << std::endl;
 
     std::string res;
