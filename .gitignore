@@ -32,6 +32,9 @@
 *.out
 *.app
 
+# Stack trace
+main.exe.stackdump
+
 # Jetbrains files
 .idea
 cmake-build-debug
