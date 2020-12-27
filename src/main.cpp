@@ -1,10 +1,16 @@
+/**
+ * \file main.cpp
+ * \brief Projet CLIAgeOfWar : méthode principale.
+ * \version 0.1
+ */
+
 #include <iostream>
 #include "Game.h"
 
 /**
- * \brief   Méthode principale.
- * \details Lance le jeu avec les paramètres par défaut.
- * \return  Un entier 0 si la partie s'est terminée sans erreur.
+ * \fn main
+ * \brief Lance le jeu avec les paramètres par défaut.
+ * \return Un entier 0 si la partie s'est terminée sans erreur.
  */
 int main() {
     Game game(10, 100, 8);
