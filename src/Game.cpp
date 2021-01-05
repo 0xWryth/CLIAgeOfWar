@@ -59,4 +59,10 @@ void Game::displayPlayer() {
     _console.addToPanel("Bank:", Panel::Right);
     _console.addToPanel(_players.first.displayStr(), Panel::Right);
     _console.addToPanel(_players.second.displayStr(), Panel::Right);
+    _console.addToPanel("", Panel::Right);
+    _console.addToPanel("Help:", Panel::Right);
+    _console.addToPanel("  [F]antassin", Panel::Right);
+    _console.addToPanel("  [A]rcher", Panel::Right);
+    _console.addToPanel("  [C]atapult", Panel::Right);
+    _console.addToPanel("  [S]uper-soldier", Panel::Right);
 }
