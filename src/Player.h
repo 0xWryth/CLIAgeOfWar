@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include "Console.h"
+#include "HomeCase.h"
 
 /**
  * \class Player
@@ -22,6 +23,7 @@ private:
     int _playerId;
     static int _playerNumber;
     int _coins;
+    HomeCase* _homeCase;
 public:
     /**
      * \brief Constructeur de la classe Player
@@ -41,6 +43,10 @@ public:
      * \param un objet Console correspondant à l'instance courante de Console du jeu.
      */
     void initialize(const Console console);
+
+    void setHomeCase(HomeCase* homeCase);
+
+    char getFirstLetter();
 
     /**
      * \fn getName

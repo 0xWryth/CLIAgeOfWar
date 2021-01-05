@@ -4,6 +4,7 @@ Game::Game(const int gridSize, const int maxTurnLimit, const int earnings) {
     _maxTurnLimit = maxTurnLimit;
     _console = Console();
     _grid = new Grid(gridSize);
+    _grid->setGame(this);
     _earnings = earnings;
     _currentTurn = 0;
 
@@ -65,4 +66,12 @@ void Game::displayPlayer() {
     _console.addToPanel("  [A]rcher", Panel::Right);
     _console.addToPanel("  [C]atapult", Panel::Right);
     _console.addToPanel("  [S]uper-soldier", Panel::Right);
+}
+
+const std::pair<Player, Player> &Game::getPlayers() const {
+    return _players;
+}
+
+Console &Game::getConsole() {
+    return _console;
 }

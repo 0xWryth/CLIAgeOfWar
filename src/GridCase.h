@@ -3,9 +3,9 @@
 
 class GridCase {
 private:
-
+    int _position;
 public:
-    GridCase();
+    GridCase(int position = 0);
 };
 
 #endif //CLIAGEOFWAR_GRIDCASE_H

@@ -7,8 +7,8 @@
  * \version 0.1
  */
 
-#include "Console.h"
 #include "Grid.h"
+#include "Console.h"
 #include "Player.h"
 
 /**
@@ -50,6 +50,10 @@ public:
      * \param une instance de Player représentant le joueur qui joue.
      */
     void play(Player p);
+
+    const std::pair<Player, Player> &getPlayers() const;
+
+    Console &getConsole();
 };
 
 
