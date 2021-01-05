@@ -10,10 +10,9 @@
  */
 
 #include "HomeCase.h"
-#include "Grid.h"
-#include "GridCase.h"
 #include "GridCase.h"
 #include "Game.h"
+class Game;
 
 /**
  * \class Grid

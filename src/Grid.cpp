@@ -27,4 +27,6 @@ std::string Grid::displayStr() {
     res += "  " + std::to_string(p2.getFirstLetter()) + "  ";
 
     _game->getConsole().addToPanel(res, Panel::Left);
+
+    return "";
 }

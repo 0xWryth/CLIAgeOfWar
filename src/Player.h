@@ -9,7 +9,8 @@
 
 #include <iostream>
 #include "Console.h"
-#include "HomeCase.h"
+
+class HomeCase;
 
 /**
  * \class Player
