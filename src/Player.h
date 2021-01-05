@@ -47,7 +47,7 @@ public:
 
     void setHomeCase(HomeCase* homeCase);
 
-    char getFirstLetter();
+    std::string getFirstLetter();
 
     /**
      * \fn getName

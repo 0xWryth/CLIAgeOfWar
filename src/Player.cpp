@@ -20,6 +20,6 @@ void Player::setHomeCase(HomeCase *homeCase) {
     _homeCase = homeCase;
 }
 
-char Player::getFirstLetter() {
-    return _playerName[0];
+std::string Player::getFirstLetter() {
+    return std::string(1, _playerName[0]);
 }

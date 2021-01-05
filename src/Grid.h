@@ -33,7 +33,7 @@ public:
      */
     Grid(const int gridSize);
     void setGame(Game* game);
-    std::string displayStr();
+    void display();
 };
 
 

@@ -29,6 +29,7 @@ void Game::play(Player p) {
     _console.clear();
     _console.addToPanel(_consoleHeader, Panel::Top);
     displayPlayer();
+    _grid->display();
 
     std::string whosTurn = "\nTour n°" + std::to_string(_currentTurn)
         + ". C'est au tour du joueur "
