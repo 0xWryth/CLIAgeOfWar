@@ -41,6 +41,26 @@ public:
      * \param un objet Console correspondant à l'instance courante de Console du jeu.
      */
     void initialize(const Console console);
+
+    /**
+     * \fn getName
+     * \brief Retourne la chaine de caractère correspondant au nom du joueur.
+     */
+    std::string getName() const { return _playerName; };
+
+    /**
+     * \fn incrementCoins
+     * \brief Ajoute un nombre \p coins aux pièces d'or du joueur.
+     * \param coins un entier représentant le nombre de pièces à ajouter à la cagnotte du joueur.
+     */
+    void incrementCoins(int coins) { if(coins > 0) _coins += coins; };
+
+    /**
+     * \fn decrementCoins
+     * \brief Décrémente de \p coins pièces d'or la cagnotte du joueur.
+     * \param coins un entier représentant le nombre de pièces à enlever de la banque du joueur.
+     */
+    void decrementCoins(int coins) { if(coins > 0) _coins -= coins; };
 };
 
 

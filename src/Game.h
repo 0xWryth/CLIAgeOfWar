@@ -22,6 +22,7 @@ class Game {
 private:
     int _maxTurnLimit;
     int _earnings;
+    int _currentTurn;
     Console _console;
     Grid* _grid = nullptr;
     std::pair<Player, Player> _players;
@@ -42,6 +43,13 @@ public:
      * \brief Fonction en charge de la gestion du tour-par-tour.
      */
     void turn();
+
+    /**
+     * \fn play
+     * \brief Tour de jeu d'un joueur.
+     * \param une instance de Player représentant le joueur qui joue.
+     */
+    void play(Player p);
 };
 
 

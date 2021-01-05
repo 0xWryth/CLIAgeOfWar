@@ -5,11 +5,13 @@ title UML - Projet C++
 class Game {
     - int _maxTurnLimit
     - int _earnings
+    - int _currentTurn
     - string _consoleHeader
     - void initializeGame()
     - void displayPlayer()
     + Game(int gridSize, int maxTurnLimit, int earnings)
     + void turn()
+    + void play(Player p)
 }
 class Console {
     - map<Panel, vector<string>> _panels
@@ -48,6 +50,9 @@ class Player {
     + Player()
     + string displayStr()
     + void initiliaze(Console console)
+    + std::string getName()
+    + void incrementCoins(int coins)
+    + void decrementCoins(int coins)
 }
 enum Panel {
   Top
