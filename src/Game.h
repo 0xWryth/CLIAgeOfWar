@@ -11,6 +11,7 @@
 #include "Console.h"
 #include "Player.h"
 class Grid;
+
 /**
  * \class Game
  * \brief classe representant une partie de CLIAgeOfWar

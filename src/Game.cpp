@@ -23,6 +23,9 @@ void Game::turn() {
 
         _currentTurn++;
     } while(_currentTurn < _maxTurnLimit);  // TODO : "&& noWinner"...
+
+    if(_currentTurn == _maxTurnLimit)
+        std::cout << "End of the game, the maximum number of turn is reached.";
 }
 
 void Game::play(Player p) {
@@ -30,19 +33,46 @@ void Game::play(Player p) {
     _console.addToPanel(_consoleHeader, Panel::Top);
     displayPlayer();
 
-    std::string whosTurn = "\nTour n°" + std::to_string(_currentTurn)
-        + ". C'est au tour du joueur "
-        + p.getName() + ".\n";
+    std::string whosTurn = "\nTurn n°" + std::to_string(_currentTurn)
+        + ". It's " + p.getName() + "'s turn.\n";
     _console.addToPanel(whosTurn, Panel::Bottom);
 
     _console.display();
 
-    std::string playerAction = _console.prompt("Action à jouer :");
+    std::string playerAction = "";
 
     do {
-        playerAction = _console.prompt("Action à jouer :");
-        // TODO: handle player input (game "actions" to define)
+        playerAction = _console.prompt("Unit to create (see \"Help\" section) :");
+
+        if(playerAction.size() == 1) {
+
+            /* TODO:
+                - handle player input (unit "actions" to define : 'F', 'S', 'C', ...)
+                - before purchase, check if player have enough coins
+                - then, remove corresponding cost
+            */
+            switch (std::toupper(playerAction.at(0))) { // or .front()
+                case 'F':
+                    // deal with L
+                    break;
+                case 'A':
+                    // deal with A
+                    break;
+                case 'C':
+                    // deal with C
+                    break;
+                case 'S':
+                    // deal with S
+                    break;
+                case 'P':   // pass new unit creation
+                    break;
+                default:
+                    // deal with default :
+                    playerAction = "";
+            }
+        }
     } while(playerAction.size() != 1);
+
 }
 
 void Game::initializeGame() {
@@ -66,6 +96,7 @@ void Game::displayPlayer() {
     _console.addToPanel("  [A]rcher", Panel::Right);
     _console.addToPanel("  [C]atapult", Panel::Right);
     _console.addToPanel("  [S]uper-soldier", Panel::Right);
+    _console.addToPanel("  [P]ass unit recruitment", Panel::Right);
 }
 
 const std::pair<Player, Player> &Game::getPlayers() const {
