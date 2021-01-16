@@ -24,6 +24,7 @@ public:
     GridCase(int position = 0);
 
     bool placeUnit(Troup* unit);
+    bool isEmpty() { return _unit == nullptr; };
 };
 
 #endif //CLIAGEOFWAR_GRIDCASE_H

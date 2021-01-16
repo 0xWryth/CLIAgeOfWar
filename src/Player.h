@@ -68,6 +68,12 @@ public:
      * \param coins un entier représentant le nombre de pièces à enlever de la banque du joueur.
      */
     void decrementCoins(int coins) { if(coins > 0) _coins -= coins; };
+
+    /**
+     * \fn isKO
+     * \brief Renvoie true si la base du joueur a été détruite.
+     */
+    bool isKO();
 };
 
 

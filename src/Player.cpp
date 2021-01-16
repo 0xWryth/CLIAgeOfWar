@@ -1,5 +1,10 @@
 #include "Player.h"
 
+
+// Placed here to avoid forward issue, good idea ?
+#include "HomeCase.h"
+
+
 int Player::_playerNumber = 1;
 
 Player::Player() {
@@ -22,4 +27,8 @@ void Player::setHomeCase(HomeCase *homeCase) {
 
 std::string Player::getFirstLetter() {
     return std::string(1, _playerName[0]);
+}
+
+bool Player::isKO() {
+    return _homeCase->getCurrentHealth() <= 0;
 }

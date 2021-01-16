@@ -34,6 +34,18 @@ public:
     Grid(const int gridSize);
     void setGame(Game* game);
     void display();
+
+    int getGridSize() const { return _gridSize; };
+
+//    GridCase &getFirstCase() const {
+//        if(_gridCases != nullptr)
+//            return _gridCases[0];
+//    }
+//
+//    GridCase &getLastCase() const {
+//        if(_gridCases != nullptr)
+//            return _gridCases[_gridSize];
+//    }
 };
 
 

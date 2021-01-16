@@ -28,15 +28,15 @@ Here are some instructions on how to get the development env running.
 
 First, clone this repository with the following command :
 
-`git clone https://github.com/0xWryth/CLIAgeOfWar`
+#### `git clone https://github.com/0xWryth/CLIAgeOfWar`
 
 Then build & run the executable `./out/main` from source code using :
 
-`make run`
+#### `make run`
 
 or
 
-`make clean run`
+#### `make clean run`
 
 to delete the executable file and all the object files from the directory before.
 
@@ -62,7 +62,7 @@ To do this, each player can create a unit on the square of his base once per rou
 ### Authors
 
 * **Lucas B.** - *Code structure, console display, ...* - @0xWryth
-* **Antonin D.** - *Documentation, ...* - @adepreis
+* **Antonin D.** - *Documentation, input processing, ...* - @adepreis
 
 ---
 

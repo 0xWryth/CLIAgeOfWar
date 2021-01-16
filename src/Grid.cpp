@@ -45,6 +45,4 @@ void Grid::display() {
     _game->getConsole().addToPanel(topLine, Panel::Left);
     _game->getConsole().addToPanel(bottomLine, Panel::Left);
 
-
-
 }

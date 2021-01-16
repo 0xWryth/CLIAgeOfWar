@@ -12,6 +12,8 @@ class Game {
     + Game(int gridSize, int maxTurnLimit, int earnings)
     + void turn()
     + void play(Player p)
+    + <Player, Player>& getPlayers()
+    + Console getConsole()
 }
 class Console {
     - map<Panel, vector<string>> _panels
@@ -27,16 +29,25 @@ abstract class Troup {
     - int _damage
     - int** _reach
 }
-class Grid
+class Grid {
+    - int _gridSize
+    + Grid(const int gridSize)
+    + void setGame(Game* game)
+    + void display()
+    + int getGridSize()
+}
 class GridCase {
-    + int position
+    - int position
+    + GridCase(int position)
+    + bool placeUnit(Troup* unit)
     + bool isEmpty()
 }
 class HomeCase {
 }
 abstract class Health {
-    - int _initialHealth
-    - int _currentHealth
+    # int _initialHealth
+    # int _currentHealth
+    + int getCurrentHealth()
 }
 class Fantassin
 class SuperSoldier
@@ -49,10 +60,13 @@ class Player {
     - {static} int _playerNumber
     + Player()
     + string displayStr()
-    + void initiliaze(Console console)
-    + std::string getName()
+    + void initialize(Console console)
+    + void setHomeCase(HomeCase* homeCase)
+    + string getFirstLetter()
+    + string getName()
     + void incrementCoins(int coins)
     + void decrementCoins(int coins)
+    + bool isKO()
 }
 enum Panel {
   Top

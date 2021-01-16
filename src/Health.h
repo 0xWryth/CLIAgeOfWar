@@ -5,8 +5,17 @@
 
 class Health {
 private:
+protected:
     int _initialHealth;
     int _currentHealth;
+public:
+    /* TODO : manipulate current health ? add, remove (+ verifications) */
+
+    /**
+     * \fn getCurrentHealth
+     * \brief Retourne le nombre de points de vie actuel.
+     */
+    int getCurrentHealth() const { return _currentHealth; };
 };
 
 

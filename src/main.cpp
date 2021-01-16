@@ -13,7 +13,7 @@
  * \return Un entier 0 si la partie s'est terminée sans erreur.
  */
 int main() {
-    Game game(12, 3, 8);
+    Game game(12, 5, 8);
 
     return 0;
 }

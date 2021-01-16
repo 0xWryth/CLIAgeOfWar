@@ -19,13 +19,19 @@ void Game::turn() {
         _players.second.incrementCoins(_earnings);
 
         play(_players.first);
-        play(_players.second);
+        play(_players.second);  // todo: if player 1 wins, exit before P2 turn (?)
 
         _currentTurn++;
-    } while(_currentTurn < _maxTurnLimit);  // TODO : "&& noWinner"...
+    } while(_currentTurn <= _maxTurnLimit  // max turn exceeded or no winner
+            && !_players.first.isKO()
+            && !_players.second.isKO() );
 
-    if(_currentTurn == _maxTurnLimit)
+    if(_currentTurn >= _maxTurnLimit)
         std::cout << "End of the game, the maximum number of turn is reached.";
+    else if(_players.first.isKO())
+        std::cout << "End of the game, " << _players.first.getName() << "'s base is KO !";
+    else
+        std::cout << "End of the game, " << _players.second.getName() << "'s base is KO !";
 }
 
 void Game::play(Player p) {
@@ -49,7 +55,7 @@ void Game::play(Player p) {
 
             /* TODO:
                 - handle player input (unit "actions" to define : 'F', 'S', 'C', ...)
-                - before purchase, check if player have enough coins
+                - before purchase, check if player have enough coins (& unit can be placed ?)
                 - then, remove corresponding cost
             */
             switch (std::toupper(playerAction.at(0))) { // or .front()
@@ -82,6 +88,9 @@ void Game::initializeGame() {
 
     _players.first.initialize(_console);
     _players.second.initialize(_console);
+
+    _players.first.setHomeCase(new HomeCase(&_players.first, 0));
+    _players.second.setHomeCase(new HomeCase(&_players.second, _grid->getGridSize()));
 
     _currentTurn++;
     turn();
