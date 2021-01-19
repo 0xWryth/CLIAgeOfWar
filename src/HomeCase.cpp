@@ -6,6 +6,4 @@ HomeCase::HomeCase(Player *owner, int position) : GridCase(position) {
     // inherited attributes are hardcoded here (temporarily ? later from xml/txt file ?)
     _initialHealth = 100;
     _currentHealth = 100;
-
-    std::cout << position << std::endl;
 }

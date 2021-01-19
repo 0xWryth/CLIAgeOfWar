@@ -32,20 +32,11 @@ public:
      * \param gridSize  Entier représentant la taille du plateau de jeu.
      */
     Grid(const int gridSize, Game* game);
-//    void setGame(Game* game);
     void display();
 
     int getGridSize() const { return _gridSize; };
 
-//    GridCase &getFirstCase() const {
-//        if(_gridCases != nullptr)
-//            return _gridCases[0];
-//    }
-//
-//    GridCase &getLastCase() const {
-//        if(_gridCases != nullptr)
-//            return _gridCases[_gridSize];
-//    }
+    void debug();
 };
 
 

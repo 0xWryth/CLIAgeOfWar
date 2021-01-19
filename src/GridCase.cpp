@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GridCase.h"
 
 GridCase::GridCase(int position) {
@@ -7,17 +8,19 @@ GridCase::GridCase(int position) {
 }
 
 bool GridCase::placeUnit(Troup* unit) {
-    if (_filled) {
-        return false;
+    if (_filled) { // a unit is already there
+        return false; // unit can't be placed
     }
-
-    _filled = true;
-    _unit = unit;
-    return true;
+    else {
+        _filled = true; // update unit
+        _unit = unit;
+        return true;  // unit has been placed
+    }
 }
 
 bool GridCase::isEmpty() {
-    return _filled;
+    std::cout << (!_filled ? "empty" : "not empty") << std::endl;
+    return !_filled;
 }
 
 std::string GridCase::getTroupName(bool isShort) {

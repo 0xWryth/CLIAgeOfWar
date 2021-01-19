@@ -9,9 +9,6 @@ Grid::Grid(const int gridSize, Game* game) {
     Player p1 = _game->getPlayers().first;
     Player p2 = _game->getPlayers().second;
 
-//    HomeCase* h = p1.getHomeCase();
-//    std::cout << h << std::endl;
-
     HomeCase h1 = HomeCase(&p1, 0);
     HomeCase h2 = HomeCase(&p2, gridSize - 1);
     p1.setHomeCase(&h1);
@@ -23,10 +20,6 @@ Grid::Grid(const int gridSize, Game* game) {
     }
     _gridCases.push_back(h2);
 }
-
-//void Grid::setGame(Game* game) {
-//
-//}
 
 void Grid::display() {
     Player p1 = _game->getPlayers().first;
@@ -43,8 +36,7 @@ void Grid::display() {
     std::string bottomLine = "";
     for (int i = 0; i < _gridSize; ++i) {
         topLine += "+---";
-
-//        middleLine += _gridCases[i].isEmpty() ? "|   " : "| " + _gridCases[i].getTroupName(true) + " ";
+        middleLine += _gridCases[i].isEmpty() ? "|   " : "";
         std::string numberToString = std::to_string(i);
         bottomLine += "  " + numberToString + std::string(numberToString.length() == 1 ? 1 : 0,' ' );
     }
@@ -55,5 +47,10 @@ void Grid::display() {
     _game->getConsole().addToPanel(middleLine, Panel::Left);
     _game->getConsole().addToPanel(topLine, Panel::Left);
     _game->getConsole().addToPanel(bottomLine, Panel::Left);
+}
 
+void Grid::debug() {
+    for (int i = 0; i < _gridSize; ++i) {
+        std::cout << _gridCases[i].isEmpty() << std::endl;
+    }
 }

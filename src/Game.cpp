@@ -24,9 +24,10 @@ void Game::turn() {
         play(_players.second);  // todo: if player 1 wins, exit before P2 turn (?)
 
         _currentTurn++;
-    } while(_currentTurn <= _maxTurnLimit  // max turn exceeded or no winner
-            && !_players.first.isKO()
-            && !_players.second.isKO() );
+//    } while(_currentTurn <= _maxTurnLimit  // max turn exceeded or no winner
+//            && !_players.first.isKO()
+//            && !_players.second.isKO() );
+    } while(true);
 
     if(_currentTurn >= _maxTurnLimit)
         std::cout << "End of the game, the maximum number of turn is reached.";
@@ -37,20 +38,20 @@ void Game::turn() {
 }
 
 void Game::play(Player p) {
+    _console.clear();
+    _console.addToPanel(_consoleHeader, Panel::Top);
+    displayPlayer();
+    _grid->display();
+
+    std::string whosTurn = "\nTurn n°" + std::to_string(_currentTurn)
+                           + ". It's " + p.getName() + "'s turn.\n";
+    _console.addToPanel(whosTurn, Panel::Bottom);
+
+    _console.display();
+
     std::string playerAction = "";
 
     do {
-        _console.clear();
-        _console.addToPanel(_consoleHeader, Panel::Top);
-        displayPlayer();
-        _grid->display();
-
-        std::string whosTurn = "\nTurn n°" + std::to_string(_currentTurn)
-                               + ". It's " + p.getName() + "'s turn.\n";
-        _console.addToPanel(whosTurn, Panel::Bottom);
-
-        _console.display();
-
         playerAction = _console.prompt("Unit to create (see \"Help\" section) :");
 
         if(playerAction.size() == 1) {
@@ -65,6 +66,7 @@ void Game::play(Player p) {
                 switch (std::toupper(playerAction.at(0))) { // or .front()
                     case 'F':
                         p.placeTroupOnHomeCase(new Fantassin());
+                        //_grid->debug();
                         break;
                     case 'A':
                         p.placeTroupOnHomeCase(new Archer());
@@ -78,6 +80,9 @@ void Game::play(Player p) {
                         // deal with default :
                         playerAction = "";
                 }
+            }
+            else {
+                playerAction = "";
             }
         }
     } while(playerAction.size() != 1);
