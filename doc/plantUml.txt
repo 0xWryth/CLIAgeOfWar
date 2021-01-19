@@ -25,9 +25,11 @@ class Console {
     + string prompt(string message)
 }
 abstract class Troup {
-    - int _nbPiece
-    - int _damage
-    - int** _reach
+    # int _nbPiece
+    # int _damage
+    # int** _reach
+    + int getCost()
+    + int getDamage()
 }
 class Grid {
     - int _gridSize
