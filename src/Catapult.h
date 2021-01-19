@@ -4,7 +4,8 @@
 #include "Troup.h"
 
 class Catapult : public Troup {
-
+public:
+    std::string getName(bool isShort) override;
 };
 
 

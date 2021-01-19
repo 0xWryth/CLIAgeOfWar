@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include "Console.h"
+#include "Troup.h"
+#include "GridCase.h"
 
 class HomeCase;
 
@@ -74,6 +76,12 @@ public:
      * \brief Renvoie true si la base du joueur a été détruite.
      */
     bool isKO();
+
+    bool canPlaceTroup();
+
+    void placeTroupOnHomeCase(Troup* troup);
+
+    GridCase* getHomeCase();
 };
 
 

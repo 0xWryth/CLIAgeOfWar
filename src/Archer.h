@@ -4,7 +4,8 @@
 #include "Troup.h"
 
 class Archer : public Troup {
-
+public:
+    std::string getName(bool isShort) override;
 };
 
 

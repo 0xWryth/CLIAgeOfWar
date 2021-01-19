@@ -2,6 +2,7 @@
 #define CLIAGEOFWAR_TROUP_H
 
 
+#include <string>
 #include "Health.h"
 
 // TODO: Make Troup class abstract
@@ -11,6 +12,8 @@ private:
     int _cost;
     int _damage;
     int** reach;
+public:
+    virtual std::string getName(bool isShort = false) = 0;
 };
 
 

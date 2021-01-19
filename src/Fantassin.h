@@ -4,7 +4,8 @@
 #include "Troup.h"
 
 class Fantassin : public Troup {
-
+public:
+    std::string getName(bool isShort) override;
 };
 
 

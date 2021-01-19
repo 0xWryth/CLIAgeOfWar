@@ -19,12 +19,15 @@
 class GridCase {
 private:
     int _position;
-    Troup* _unit = nullptr;
+    Troup* _unit;
+    bool _filled;
 public:
     GridCase(int position = 0);
 
     bool placeUnit(Troup* unit);
-    bool isEmpty() { return _unit == nullptr; };
+    bool isEmpty();
+
+    std::string getTroupName(bool isShort = false);
 };
 
 #endif //CLIAGEOFWAR_GRIDCASE_H

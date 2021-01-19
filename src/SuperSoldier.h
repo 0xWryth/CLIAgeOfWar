@@ -4,7 +4,8 @@
 #include "Troup.h"
 
 class SuperSoldier : public Troup {
-
+public:
+    std::string getName(bool isShort) override;
 };
 
 

@@ -1,22 +1,32 @@
 #include "Grid.h"
 
-Grid::Grid(const int gridSize) {
+Grid::Grid(const int gridSize, Game* game) {
     _gridSize = gridSize;
-    _gridCases = new GridCase[_gridSize];
-}
-
-void Grid::setGame(Game* game) {
+    _gridCases = std::vector<GridCase>(0);
     _game = game;
 
     // Game initialization
     Player p1 = _game->getPlayers().first;
     Player p2 = _game->getPlayers().second;
 
-    // Initializing case value
-    for (int i = 0; i < _gridSize; ++i) {
-        _gridCases[i] = i == 0 ? HomeCase(&p1, i) : i == 1 ? HomeCase(&p2, i) : GridCase(i);
+//    HomeCase* h = p1.getHomeCase();
+//    std::cout << h << std::endl;
+
+    HomeCase h1 = HomeCase(&p1, 0);
+    HomeCase h2 = HomeCase(&p2, gridSize - 1);
+    p1.setHomeCase(&h1);
+    p2.setHomeCase(&h2);
+
+    _gridCases.push_back(h1);
+    for (int i = 1; i < gridSize - 1; ++i) {
+        _gridCases.push_back(GridCase());
     }
+    _gridCases.push_back(h2);
 }
+
+//void Grid::setGame(Game* game) {
+//
+//}
 
 void Grid::display() {
     Player p1 = _game->getPlayers().first;
@@ -33,7 +43,8 @@ void Grid::display() {
     std::string bottomLine = "";
     for (int i = 0; i < _gridSize; ++i) {
         topLine += "+---";
-        middleLine += "|   ";
+
+//        middleLine += _gridCases[i].isEmpty() ? "|   " : "| " + _gridCases[i].getTroupName(true) + " ";
         std::string numberToString = std::to_string(i);
         bottomLine += "  " + numberToString + std::string(numberToString.length() == 1 ? 1 : 0,' ' );
     }

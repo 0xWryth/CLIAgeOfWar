@@ -21,7 +21,7 @@ void Player::initialize(const Console console) {
     _playerName = console.prompt("Insert " + _playerName + " name :");
 }
 
-void Player::setHomeCase(HomeCase *homeCase) {
+void Player::setHomeCase(HomeCase* homeCase) {
     _homeCase = homeCase;
 }
 
@@ -31,4 +31,16 @@ std::string Player::getFirstLetter() {
 
 bool Player::isKO() {
     return _homeCase->getCurrentHealth() <= 0;
+}
+
+bool Player::canPlaceTroup() {
+    return _homeCase->isEmpty();
+}
+
+void Player::placeTroupOnHomeCase(Troup *troup) {
+    _homeCase->placeUnit(troup);
+}
+
+GridCase* Player::getHomeCase() {
+    return _homeCase;
 }

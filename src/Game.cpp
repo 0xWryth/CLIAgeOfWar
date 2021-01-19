@@ -1,10 +1,12 @@
 #include "Game.h"
+#include "Fantassin.h"
+#include "Archer.h"
+#include "Catapult.h"
 
 Game::Game(const int gridSize, const int maxTurnLimit, const int earnings) {
     _maxTurnLimit = maxTurnLimit;
     _console = Console();
-    _grid = new Grid(gridSize);
-    _grid->setGame(this);
+    _grid = new Grid(gridSize, this);
     _earnings = earnings;
     _currentTurn = 0;
 
@@ -35,47 +37,47 @@ void Game::turn() {
 }
 
 void Game::play(Player p) {
-    _console.clear();
-    _console.addToPanel(_consoleHeader, Panel::Top);
-    displayPlayer();
-    _grid->display();
-
-    std::string whosTurn = "\nTurn n°" + std::to_string(_currentTurn)
-        + ". It's " + p.getName() + "'s turn.\n";
-    _console.addToPanel(whosTurn, Panel::Bottom);
-
-    _console.display();
-
     std::string playerAction = "";
 
     do {
+        _console.clear();
+        _console.addToPanel(_consoleHeader, Panel::Top);
+        displayPlayer();
+        _grid->display();
+
+        std::string whosTurn = "\nTurn n°" + std::to_string(_currentTurn)
+                               + ". It's " + p.getName() + "'s turn.\n";
+        _console.addToPanel(whosTurn, Panel::Bottom);
+
+        _console.display();
+
         playerAction = _console.prompt("Unit to create (see \"Help\" section) :");
 
         if(playerAction.size() == 1) {
 
             /* TODO:
-                - handle player input (unit "actions" to define : 'F', 'S', 'C', ...)
-                - before purchase, check if player have enough coins (& unit can be placed ?)
+                - handle player input (unit "actions" to define : 'F', 'C', ...)
+                - before purchase, check if player have enough coins
                 - then, remove corresponding cost
             */
-            switch (std::toupper(playerAction.at(0))) { // or .front()
-                case 'F':
-                    // deal with L
-                    break;
-                case 'A':
-                    // deal with A
-                    break;
-                case 'C':
-                    // deal with C
-                    break;
-                case 'S':
-                    // deal with S
-                    break;
-                case 'P':   // pass new unit creation
-                    break;
-                default:
-                    // deal with default :
-                    playerAction = "";
+
+            if (p.canPlaceTroup()) {
+                switch (std::toupper(playerAction.at(0))) { // or .front()
+                    case 'F':
+                        p.placeTroupOnHomeCase(new Fantassin());
+                        break;
+                    case 'A':
+                        p.placeTroupOnHomeCase(new Archer());
+                        break;
+                    case 'C':
+                        p.placeTroupOnHomeCase(new Catapult());
+                        break;
+                    case 'P':   // pass new unit creation
+                        break;
+                    default:
+                        // deal with default :
+                        playerAction = "";
+                }
             }
         }
     } while(playerAction.size() != 1);
@@ -88,9 +90,6 @@ void Game::initializeGame() {
 
     _players.first.initialize(_console);
     _players.second.initialize(_console);
-
-    _players.first.setHomeCase(new HomeCase(&_players.first, 0));
-    _players.second.setHomeCase(new HomeCase(&_players.second, _grid->getGridSize()));
 
     _currentTurn++;
     turn();
@@ -105,7 +104,6 @@ void Game::displayPlayer() {
     _console.addToPanel("  [F]antassin", Panel::Right);
     _console.addToPanel("  [A]rcher", Panel::Right);
     _console.addToPanel("  [C]atapult", Panel::Right);
-    _console.addToPanel("  [S]uper-soldier", Panel::Right);
     _console.addToPanel("  [P]ass unit recruitment", Panel::Right);
 }
 

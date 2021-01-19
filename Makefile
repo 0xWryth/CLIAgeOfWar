@@ -1,4 +1,4 @@
-CXX=g++
+CXX=g++ -g
 CXXFLAGS=-Wall -Wextra -Werror
 NAME=main
 SRC_DIR=./src/
