@@ -29,9 +29,14 @@ public:
     /**
      * \brief Constructeur de la classe Grid
      * \param game
-     * \param gridSize  Entier représentant la taille du plateau de jeu.
+     * \param gridSize Entier représentant la taille du plateau de jeu.
      */
     Grid(const int gridSize, Game* game);
+
+    /**
+     * \fn display
+     * \brief Fonction en charge de l'affichage de la grille. Positionne les cases et leurs contenus.
+     */
     void display();
 
     int getGridSize() const { return _gridSize; };

@@ -29,7 +29,6 @@ enum class Action {
  * La classe stocke les caractéristiques d'une unité.
  */
 class Troup : public Health {
-private:
 protected:
     int _cost;
     int _damage;
@@ -42,12 +41,19 @@ public:
      * \brief Retourne le nombre de pièces d'or nécessaire pour acheter l'unité.
      */
     int getCost() { return _cost; };
+
     /**
      * \fn getDamage
      * \brief Retourne en entier correspondnat aux dommages infligés par l'unité.
      */
     int getDamage() { return _damage; };
 
+    /**
+     * \fn getName
+     * \brief Fonction abstraite censée renvoyer le nom de l'unité qui occupe la case.
+     * \param isShort Booléen optionnel permettant d'obtenir le nom réduit à un caractère.
+     * \return Une chaine de caractère correspondant au type de l'unité placée sur la case.
+     */
     virtual std::string getName(bool isShort = false) = 0;
 };
 

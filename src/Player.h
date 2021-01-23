@@ -77,8 +77,18 @@ public:
      */
     bool isKO();
 
+    /**
+     * \fn canPlaceTroup
+     * \brief Fonction permettant de vérifier si la base du joueur n'est pas déjà occupée.
+     * \return true si l'emplacement est vide, false sinon.
+     */
     bool canPlaceTroup();
 
+    /**
+     * \fn placeTroupOnHomeCase
+     * \brief Fonction qui place une unité sur la base du joueur.
+     * \param troup Pointeur sur l'unité à placer.
+     */
     void placeTroupOnHomeCase(Troup* troup);
 
     GridCase* getHomeCase();
