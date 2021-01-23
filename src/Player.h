@@ -77,9 +77,11 @@ public:
 
     bool canPlaceTroup();
 
-    void placeTroupOnHomeCase(Troup* troup);
+    bool placeTroupOnHomeCase(Troup* troup);
 
     GridCase& getHomeCase();
+
+    int getCoins() const;
 };
 
 

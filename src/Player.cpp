@@ -30,15 +30,18 @@ bool Player::isKO() {
 }
 
 bool Player::canPlaceTroup() {
-    bool res = _homeCase.isEmpty();
-    std::cout << "test" << std::endl;
-    return res;
+    return _homeCase.isEmpty();
 }
 
-void Player::placeTroupOnHomeCase(Troup *troup) {
-    _homeCase.placeUnit(troup);
+bool Player::placeTroupOnHomeCase(Troup *troup) {
+    _coins -= troup->getCost();
+    return _homeCase.placeUnit(troup);
 }
 
 GridCase& Player::getHomeCase() {
     return _homeCase;
+}
+
+int Player::getCoins() const {
+    return _coins;
 }

@@ -11,7 +11,6 @@ Game::Game(const int gridSize, const int maxTurnLimit, const int earnings) {
 
     HomeCase h1 = HomeCase(0);
     _p1 = new Player(h1);
-    std::cout << &h1 << " " << &_p1->getHomeCase() << std::endl;
 
     HomeCase h2 = HomeCase(gridSize - 1);
     _p2 = new Player(h2);
@@ -61,34 +60,39 @@ void Game::play(Player* p) {
         playerAction = _console.prompt("Unit to create (see \"Help\" section) :");
 
         if(playerAction.size() == 1) {
-
-            /* TODO:
-                - handle player input (unit "actions" to define : 'F', 'C', ...)
-                - before purchase, check if player have enough coins
-                - then, remove corresponding cost
-            */
-
+            // If homecase is not filled
             if (p->canPlaceTroup()) {
+                Troup *newTroup = NULL;
                 switch (std::toupper(playerAction.at(0))) { // or .front()
                     case 'F':
-                        p->placeTroupOnHomeCase(new Fantassin());
+                        newTroup = new Fantassin();
                         //_grid->debug();
                         break;
                     case 'A':
-                        p->placeTroupOnHomeCase(new Archer());
+                        newTroup = new Archer();
                         break;
                     case 'C':
-                        p->placeTroupOnHomeCase(new Catapult());
+                        newTroup = new Catapult();
                         break;
                     case 'P':   // pass new unit creation
+                        playerAction = "P";
                         break;
                     default:
                         // deal with default :
                         playerAction = "";
                 }
+                if (newTroup != NULL) {
+                    if (p->getCoins() > newTroup->getCost()) {
+                        p->placeTroupOnHomeCase(newTroup);
+                    }
+                    else {
+                        std::cout << "You do not have enough money for this action." << std::endl;
+                        playerAction = "";
+                    }
+                }
             }
             else {
-                playerAction = "";
+                playerAction = " ";
             }
         }
     } while(playerAction.size() != 1);
