@@ -10,8 +10,17 @@
 #include <string>
 #include "Health.h"
 #include <vector>
+#include <map>
 
-// TODO: Make Troup class abstract
+/**
+ * \enum Action
+ * \brief enumeration representant les différentes action possibles pour une unité
+ */
+enum class Action {
+    Attack,     /*!< attaquer */
+    MoveForward,/*!< avancer */
+    None        /*!< ne rien faire */
+};
 
 /**
  * \class Troup
@@ -25,6 +34,7 @@ protected:
     int _cost;
     int _damage;
     std::vector<std::vector<int>> _reach;
+    std::map<int, Action> _actions;
 
 public:
     /**

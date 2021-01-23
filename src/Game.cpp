@@ -20,8 +20,12 @@ void Game::turn() {
         _players.first.incrementCoins(_earnings);
         _players.second.incrementCoins(_earnings);
 
+        resolveActions(_players.first);
+        // TODO: if player 1 wins, exit before P1 unit creation and P2 turn (?)
         play(_players.first);
-        play(_players.second);  // todo: if player 1 wins, exit before P2 turn (?)
+
+        resolveActions(_players.second);
+        play(_players.second);
 
         _currentTurn++;
 //    } while(_currentTurn <= _maxTurnLimit  // max turn exceeded or no winner
@@ -87,6 +91,36 @@ void Game::play(Player p) {
         }
     } while(playerAction.size() != 1);
 
+}
+
+void Game::resolveActions(Player p) {
+    bool unableToDoAction1 = false;
+
+    for (int phase = 1; phase <= 3; phase++) {
+        std::cout << "Resolution des actions " << phase << " du joueur " << p.getName()
+                  << ", unableToDoAction1=" << unableToDoAction1 << std::endl;
+
+        /* TODO : handle action limitations during 3rd phase :
+            restrict to (unableToDoAction1 && (Fantassin || Catapult)) || SuperSoldier)
+
+        for (GridCase case : _grid->getAllCases()) {
+            if (case.unit.owner == p)
+                switch(case.unit.getAction(1)) {
+                    case Action::Attack:
+                        // handle Attack action
+                        break;
+                    case Action::MoveForward:
+                        // handle MoveForward action
+                        break;
+                    case Action::None:
+                        // handle None action
+                        break;
+                    default:
+                        break;
+                }
+        }
+         */
+    }
 }
 
 void Game::initializeGame() {

@@ -15,6 +15,10 @@ Archer::Archer() {
     std::vector<std::vector<int>> _reach{{ 1 },
                                          { 2 },
                                          { 3 } };
+
+    _actions[1] = Action::Attack;
+    _actions[2] = Action::None;
+    _actions[3] = Action::MoveForward;
 }
 
 Archer::~Archer() {

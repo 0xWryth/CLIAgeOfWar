@@ -14,6 +14,10 @@ Catapult::Catapult() {
 
     std::vector<std::vector<int>> _reach{{ 2, 3 },
                                          { 3, 4 } };
+
+    _actions[1] = Action::Attack;
+    _actions[2] = Action::MoveForward;
+    _actions[3] = Action::None;
 }
 
 Catapult::~Catapult() {

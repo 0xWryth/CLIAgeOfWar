@@ -13,6 +13,11 @@ Fantassin::Fantassin() {
     _damage = 4;
 
     std::vector<std::vector<int>> _reach{{ 1 }};
+
+    _actions[1] = Action::Attack;
+    _actions[2] = Action::MoveForward;
+    _actions[3] = Action::Attack;
+
 }
 
 Fantassin::~Fantassin() {
