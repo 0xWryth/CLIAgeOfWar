@@ -1,56 +1,44 @@
 #include "Grid.h"
 
-Grid::Grid(const int gridSize, Game* game) {
+Grid::Grid(const int gridSize, Player& p1, Player& p2) {
     _gridSize = gridSize;
-    _gridCases = std::vector<GridCase>(0);
-    _game = game;
+    _gridCases = std::vector<GridCase*>(0);
 
-    // Game initialization
-    Player p1 = _game->getPlayers().first;
-    Player p2 = _game->getPlayers().second;
-
-    HomeCase h1 = HomeCase(&p1, 0);
-    HomeCase h2 = HomeCase(&p2, gridSize - 1);
-    p1.setHomeCase(&h1);
-    p2.setHomeCase(&h2);
-
-    _gridCases.push_back(h1);
+    _gridCases.push_back(&p1.getHomeCase());
     for (int i = 1; i < gridSize - 1; ++i) {
-        _gridCases.push_back(GridCase());
+        _gridCases.push_back(new GridCase(i));
     }
-    _gridCases.push_back(h2);
+    _gridCases.push_back(&p2.getHomeCase());
 }
 
-void Grid::display() {
-    Player p1 = _game->getPlayers().first;
-    Player p2 = _game->getPlayers().second;
-
+void Grid::display(Console& console, Player& p1, Player& p2) {
     std::string res = "  " + p1.getFirstLetter() + "  ";
     res += std::string(4 * (_gridSize - 2) - 1, ' ');
     res += "  " + p2.getFirstLetter();
 
-    _game->getConsole().addToPanel(res, Panel::Left);
+    console.addToPanel(res, Panel::Left);
 
     std::string topLine = "";
     std::string middleLine = "";
     std::string bottomLine = "";
     for (int i = 0; i < _gridSize; ++i) {
+//        std::cout << _gridCases[i]->isEmpty() << std::endl;
         topLine += "+---";
-        middleLine += _gridCases[i].isEmpty() ? "|   " : "";
+        middleLine += _gridCases[i]->isEmpty() ? "|   " : "| " + _gridCases[i]->getTroupName(true) + " ";
         std::string numberToString = std::to_string(i);
         bottomLine += "  " + numberToString + std::string(numberToString.length() == 1 ? 1 : 0,' ' );
     }
     topLine += "+";
     middleLine += "|";
 
-    _game->getConsole().addToPanel(topLine, Panel::Left);
-    _game->getConsole().addToPanel(middleLine, Panel::Left);
-    _game->getConsole().addToPanel(topLine, Panel::Left);
-    _game->getConsole().addToPanel(bottomLine, Panel::Left);
+    console.addToPanel(topLine, Panel::Left);
+    console.addToPanel(middleLine, Panel::Left);
+    console.addToPanel(topLine, Panel::Left);
+    console.addToPanel(bottomLine, Panel::Left);
 }
 
 void Grid::debug() {
     for (int i = 0; i < _gridSize; ++i) {
-        std::cout << _gridCases[i].isEmpty() << std::endl;
+        std::cout << _gridCases[i]->isEmpty() << std::endl;
     }
 }

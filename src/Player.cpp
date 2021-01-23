@@ -7,7 +7,7 @@
 
 int Player::_playerNumber = 1;
 
-Player::Player() {
+Player::Player(HomeCase &homeCase) : _homeCase(homeCase) {
     _playerName = "Player " + std::to_string(_playerNumber);
     _playerId = _playerNumber++ - 1;
     _coins = 0;
@@ -21,26 +21,24 @@ void Player::initialize(const Console console) {
     _playerName = console.prompt("Insert " + _playerName + " name :");
 }
 
-void Player::setHomeCase(HomeCase* homeCase) {
-    _homeCase = homeCase;
-}
-
 std::string Player::getFirstLetter() {
     return std::string(1, _playerName[0]);
 }
 
 bool Player::isKO() {
-    return _homeCase->getCurrentHealth() <= 0;
+    return _homeCase.getCurrentHealth() <= 0;
 }
 
 bool Player::canPlaceTroup() {
-    return _homeCase->isEmpty();
+    bool res = _homeCase.isEmpty();
+    std::cout << "test" << std::endl;
+    return res;
 }
 
 void Player::placeTroupOnHomeCase(Troup *troup) {
-    _homeCase->placeUnit(troup);
+    _homeCase.placeUnit(troup);
 }
 
-GridCase* Player::getHomeCase() {
+GridCase& Player::getHomeCase() {
     return _homeCase;
 }

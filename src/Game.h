@@ -26,9 +26,10 @@ private:
     int _currentTurn;
     Console _console;
     Grid* _grid = nullptr;
-    std::pair<Player, Player> _players;
+    Player* _p1 = nullptr;
+    Player* _p2 = nullptr;
     std::string _consoleHeader;
-    void initializeGame();
+    void initializeGame(int gridSize);
     void displayPlayer();
 public:
     /**
@@ -50,7 +51,7 @@ public:
      * \brief Tour de jeu d'un joueur.
      * \param une instance de Player représentant le joueur qui joue.
      */
-    void play(Player p);
+    void play(Player* p);
 
     /**
      * \fn resolveActions

@@ -17,15 +17,12 @@
  * La classe gère l'initialisation et le stockage des paramètres d'une base.
  */
 class HomeCase : public GridCase, public Health {
-private:
-    Player* _owner;
 public:
     /**
      * \brief Constructeur de la classe HomeCase
-     * \param owner Pointeur vers le joueur propriétaire de la base.
      * \param position Entier représentant la position occupée par la base sur le plateau de jeu.
      */
-    HomeCase(Player* owner, int position);
+    HomeCase(int position);
 };
 
 

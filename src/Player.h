@@ -26,12 +26,12 @@ private:
     int _playerId;
     static int _playerNumber;
     int _coins;
-    HomeCase* _homeCase;
+    HomeCase& _homeCase;
 public:
     /**
      * \brief Constructeur de la classe Player
      */
-    Player();
+    Player(HomeCase &homeCase);
 
     /**
      * \fn displayStr
@@ -46,8 +46,6 @@ public:
      * \param un objet Console correspondant à l'instance courante de Console du jeu.
      */
     void initialize(const Console console);
-
-    void setHomeCase(HomeCase* homeCase);
 
     std::string getFirstLetter();
 
@@ -91,7 +89,7 @@ public:
      */
     void placeTroupOnHomeCase(Troup* troup);
 
-    GridCase* getHomeCase();
+    GridCase& getHomeCase();
 };
 
 

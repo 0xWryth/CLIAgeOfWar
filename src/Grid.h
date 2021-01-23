@@ -22,22 +22,25 @@ class Game;
  */
 class Grid {
 private:
-    Game* _game = nullptr;
     int _gridSize;
-    std::vector<GridCase> _gridCases;
+    std::vector<GridCase*> _gridCases;
 public:
     /**
      * \brief Constructeur de la classe Grid
-     * \param game
      * \param gridSize Entier représentant la taille du plateau de jeu.
+     * \param p1 Instance représentant le joueur 1.
+     * \param p2 Instance représentant le joueur 2.
      */
-    Grid(const int gridSize, Game* game);
+    Grid(const int gridSize, Player& p1, Player& p2);
 
     /**
      * \fn display
      * \brief Fonction en charge de l'affichage de la grille. Positionne les cases et leurs contenus.
+     * \param console Instance de Console correspondant à la sortie standard.
+     * \param p1 Instance représentant le joueur 1.
+     * \param p2 Instance représentant le joueur 2.
      */
-    void display();
+    void display(Console& console, Player& p1, Player& p2);
 
     int getGridSize() const { return _gridSize; };
 

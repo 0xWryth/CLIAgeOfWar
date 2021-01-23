@@ -15,5 +15,14 @@
 int main() {
     Game game(12, 5, 8);
 
+//    GridCase g = GridCase(0);
+//    std::cout << g.isEmpty() << std::endl << std::endl;
+//
+//    Player p = Player();
+//    HomeCase h = HomeCase(&p, 0);
+//    std::cout << h.isEmpty() << std::endl;
+
+//    Grid g = Grid(10, );
+
     return 0;
 }
