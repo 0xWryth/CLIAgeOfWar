@@ -2,13 +2,13 @@
 
 Grid::Grid(const int gridSize, Player& p1, Player& p2) {
     _gridSize = gridSize;
-    _gridCases = std::vector<GridCase>(0);
+    _gridCases = std::vector<GridCase*>(0);
 
-    _gridCases.push_back(p1.getHomeCase());
+    _gridCases.push_back(&p1.getHomeCase());
     for (int i = 1; i < gridSize - 1; ++i) {
-        _gridCases.push_back(GridCase(i));
+        _gridCases.push_back(new GridCase(i));
     }
-    _gridCases.push_back(p2.getHomeCase());
+    _gridCases.push_back(&p2.getHomeCase());
 }
 
 void Grid::display(Console& console, Player& p1, Player& p2) {
@@ -22,8 +22,9 @@ void Grid::display(Console& console, Player& p1, Player& p2) {
     std::string middleLine = "";
     std::string bottomLine = "";
     for (int i = 0; i < _gridSize; ++i) {
+//        std::cout << _gridCases[i]->isEmpty() << std::endl;
         topLine += "+---";
-        middleLine += _gridCases[i].isEmpty() ? "|   " : "| " + _gridCases[i].getTroupName(true);
+        middleLine += _gridCases[i]->isEmpty() ? "|   " : "| " + _gridCases[i]->getTroupName(true) + " ";
         std::string numberToString = std::to_string(i);
         bottomLine += "  " + numberToString + std::string(numberToString.length() == 1 ? 1 : 0,' ' );
     }
@@ -38,6 +39,6 @@ void Grid::display(Console& console, Player& p1, Player& p2) {
 
 void Grid::debug() {
     for (int i = 0; i < _gridSize; ++i) {
-        std::cout << _gridCases[i].isEmpty() << std::endl;
+        std::cout << _gridCases[i]->isEmpty() << std::endl;
     }
 }

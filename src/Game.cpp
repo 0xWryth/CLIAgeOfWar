@@ -11,6 +11,7 @@ Game::Game(const int gridSize, const int maxTurnLimit, const int earnings) {
 
     HomeCase h1 = HomeCase(0);
     _p1 = new Player(h1);
+    std::cout << &h1 << " " << &_p1->getHomeCase() << std::endl;
 
     HomeCase h2 = HomeCase(gridSize - 1);
     _p2 = new Player(h2);
@@ -26,7 +27,7 @@ void Game::turn() {
         _p2->incrementCoins(_earnings);
 
         play(_p1);
-        play(_p1);  // todo: if player 1 wins, exit before P2 turn (?)
+        play(_p2);  // todo: if player 1 wins, exit before P2 turn (?)
 
         _currentTurn++;
 //    } while(_currentTurn <= _maxTurnLimit  // max turn exceeded or no winner

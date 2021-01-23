@@ -23,7 +23,7 @@ class Game;
 class Grid {
 private:
     int _gridSize;
-    std::vector<GridCase> _gridCases;
+    std::vector<GridCase*> _gridCases;
 public:
     /**
      * \brief Constructeur de la classe Grid
