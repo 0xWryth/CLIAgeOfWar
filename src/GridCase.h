@@ -20,12 +20,17 @@ class GridCase {
 private:
     int _position;
     Troup* _unit;
+public:
+    Troup *getUnit() const;
+
+private:
     bool _filled;
 public:
     GridCase(int position = 0);
 
     bool placeUnit(Troup* unit);
     bool isEmpty();
+
 
     std::string getTroupName(bool isShort = false);
 };

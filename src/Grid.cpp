@@ -20,19 +20,28 @@ void Grid::display(Console& console, Player& p1, Player& p2) {
 
     std::string topLine = "";
     std::string middleLine = "";
+    std::string lifeLine = "";
     std::string bottomLine = "";
     for (int i = 0; i < _gridSize; ++i) {
-//        std::cout << _gridCases[i]->isEmpty() << std::endl;
         topLine += "+---";
-        middleLine += _gridCases[i]->isEmpty() ? "|   " : "| " + _gridCases[i]->getTroupName(true) + " ";
+
+        bool isEmpty = _gridCases[i]->isEmpty();
+        middleLine += isEmpty ? "|   " : "| " + _gridCases[i]->getTroupName(true) + " ";
+
+        int life = isEmpty ? 0 : _gridCases[i]->getUnit()->getCurrentHealth();
+        std::string lifeInfo = life >= 10 ? std::to_string(life) : (std::to_string(life) + " ");
+
+        lifeLine += _gridCases[i]->isEmpty() ? "|   " : "| " + lifeInfo;
         std::string numberToString = std::to_string(i);
         bottomLine += "  " + numberToString + std::string(numberToString.length() == 1 ? 1 : 0,' ' );
     }
     topLine += "+";
     middleLine += "|";
+    lifeLine += "|";
 
     console.addToPanel(topLine, Panel::Left);
     console.addToPanel(middleLine, Panel::Left);
+    console.addToPanel(lifeLine, Panel::Left);
     console.addToPanel(topLine, Panel::Left);
     console.addToPanel(bottomLine, Panel::Left);
 }

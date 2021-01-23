@@ -28,3 +28,7 @@ bool GridCase::isEmpty() {
 std::string GridCase::getTroupName(bool isShort) {
     return _unit->getName(isShort);
 }
+
+Troup *GridCase::getUnit() const {
+    return _unit;
+}
