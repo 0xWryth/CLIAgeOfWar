@@ -22,7 +22,6 @@ class Game;
  */
 class Grid {
 private:
-    Game* _game = nullptr;
     int _gridSize;
     std::vector<GridCase> _gridCases;
 public:
@@ -31,8 +30,8 @@ public:
      * \param game
      * \param gridSize  Entier représentant la taille du plateau de jeu.
      */
-    Grid(const int gridSize, Game* game);
-    void display();
+    Grid(const int gridSize, Player& p1, Player& p2);
+    void display(Console& console, Player& p1, Player& p2);
 
     int getGridSize() const { return _gridSize; };
 

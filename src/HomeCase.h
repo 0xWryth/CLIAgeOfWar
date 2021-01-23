@@ -7,9 +7,8 @@
 
 class HomeCase : public GridCase, public Health {
 private:
-    Player* _owner;
 public:
-    HomeCase(Player* owner, int position);
+    HomeCase(int position);
 };
 
 

@@ -19,7 +19,9 @@ bool GridCase::placeUnit(Troup* unit) {
 }
 
 bool GridCase::isEmpty() {
-    std::cout << (!_filled ? "empty" : "not empty") << std::endl;
+    std::cout << (!_filled ? "empty" : "not-empty") << _position << std::endl;
+
+//    std::cout << (!_filled ? "empty" + std::to_string(_position) : "not empty" + std::to_string(_position)) << std::endl;
     return !_filled;
 }
 
