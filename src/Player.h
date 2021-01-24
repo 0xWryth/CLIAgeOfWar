@@ -10,8 +10,8 @@
 #include <iostream>
 #include "Console.h"
 #include "Troup.h"
-#include "GridCase.h"
 
+class GridCase;
 class HomeCase;
 
 /**
@@ -90,6 +90,9 @@ public:
     void placeTroupOnHomeCase(Troup* troup);
 
     GridCase& getHomeCase();
+
+    // Don't seems to be useful :
+    // inline bool operator==(const X& lhs, const X& rhs){ return ...; }
 };
 
 

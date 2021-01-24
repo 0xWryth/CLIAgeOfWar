@@ -44,6 +44,12 @@ public:
 
     int getGridSize() const { return _gridSize; };
 
+    /**
+     * \fn getAllCases
+     * \brief Fournit la liste des cases de la grille.
+     */
+    std::vector<GridCase*>& getAllCases() { return _gridCases; };
+
     void debug();
 };
 

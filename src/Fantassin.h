@@ -21,7 +21,7 @@ public:
     /**
      * \brief Constructeur de la classe Fantassin
      */
-    Fantassin();
+    Fantassin(Player* player);
     /**
      * \brief Destructeur de la classe Fantassin
      */

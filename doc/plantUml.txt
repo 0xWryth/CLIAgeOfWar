@@ -33,16 +33,20 @@ abstract class Troup {
     # int _nbPiece
     # int _damage
     # int** _reach
+    # Player* _owner
     # map<int, Action> _actions
     + int getCost()
     + int getDamage()
-    {abstract} string getName(bool isShort)
+    + Player* getOwner()
+    + Action getAction(int phase)
+    + {abstract} string getName(bool isShort)
 }
 class Grid {
     - int _gridSize
     + Grid(const int gridSize, Game* game)
     + void display()
     + int getGridSize()
+    + vector<GridCase*>& getAllCases()
 }
 class GridCase {
     - int position

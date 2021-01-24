@@ -2,6 +2,12 @@
 #include "Fantassin.h"
 #include "Archer.h"
 #include "Catapult.h"
+#include <algorithm>
+#include <vector>
+
+#define PHASE_1     1
+#define PHASE_2     2
+#define PHASE_3     3
 
 Game::Game(const int gridSize, const int maxTurnLimit, const int earnings) {
     _maxTurnLimit = maxTurnLimit;
@@ -75,14 +81,14 @@ void Game::play(Player* p) {
             if (p->canPlaceTroup()) {
                 switch (std::toupper(playerAction.at(0))) { // or .front()
                     case 'F':
-                        p->placeTroupOnHomeCase(new Fantassin());
+                        p->placeTroupOnHomeCase(new Fantassin(p));
                         //_grid->debug();
                         break;
                     case 'A':
-                        p->placeTroupOnHomeCase(new Archer());
+                        p->placeTroupOnHomeCase(new Archer(p));
                         break;
                     case 'C':
-                        p->placeTroupOnHomeCase(new Catapult());
+                        p->placeTroupOnHomeCase(new Catapult(p));
                         break;
                     case 'P':   // pass new unit creation
                         break;
@@ -99,32 +105,46 @@ void Game::play(Player* p) {
 
 }
 
-void Game::resolveActions(Player p) {
+void Game::resolveActions(Player* p) {
     bool unableToDoAction1 = false;
 
-    for (int phase = 1; phase <= 3; phase++) {
-        /* TODO : find a way to handle "direction of iteration"
+    // The following action handling loop is made for the left player
+    // so for the right player, we swap the grid (restored after the loop).
+    if(p == _p2) std::reverse(_grid->getAllCases().begin(), _grid->getAllCases().end());
+
+    for (int phase = PHASE_1; phase <= PHASE_3; phase++) {
+        /* Problematic of "direction of iteration" :
             - from the nearest unit to the farthest one (phase 1)
             - from the farthest unit to the nearest one (phases 2 & 3)
+
+            -> way to handle this : the grid is reversed (depending on who plays and which is
+               the current phase) so that the iterator always goes from the left to the right.
          */
-        // std::vector<GridCase>::iterator it = cases.begin() + p.getHomeCase().getPosition(); // ?
+         if(phase == PHASE_1 || phase == PHASE_2) std::reverse(_grid->getAllCases().begin(), _grid->getAllCases().end());
 
-        // if(p.getHomeCase().getPosition() > opp.getHomeCase().getPosition()) ""cases.reverse()" // ?
 
-        std::cout << "Resolution des actions " << phase << " du joueur " << p.getName()
+        std::cout << "Resolution des actions " << phase << " du joueur " << p->getName()
                   << ", unableToDoAction1=" << unableToDoAction1 << std::endl;
 
         /* TODO : handle action limitations during 3rd phase :
             restrict to (unableToDoAction1 && (Fantassin || Catapult)) || SuperSoldier)
 
-        for (GridCase case : _grid->getAllCases()) {
-            if (case.unit.owner == p)
-                switch(case.unit.getAction(1)) {
+           TODO : handle unit range
+         */
+
+        for (std::vector<GridCase*>::iterator it = _grid->getAllCases().begin();
+             it != _grid->getAllCases().end();
+             it++)
+        {
+            if (!(*it)->isEmpty() && (*it)->getUnitOwner() == p) {
+                switch((*it)->getUnitAction(phase)) {
                     case Action::Attack:
-                        // handle Attack action
+                        // handle Attack action : if(!(*it+range)->isEmpty()) ... elif(Fantassin || Catapult)) !unableToDoAction1
+                        std::cout << "Unit "<< (*it)->getTroupName() << " attacks !" << std::endl;
                         break;
                     case Action::MoveForward:
-                        // handle MoveForward action
+                        // handle MoveForward action : if(canReach) ... elif(Fantassin || Catapult)) !unableToDoAction1
+                        std::cout << "Unit "<< (*it)->getTroupName() << " moves forward !" << std::endl;
                         break;
                     case Action::None:
                         // handle None action
@@ -132,9 +152,19 @@ void Game::resolveActions(Player p) {
                     default:
                         break;
                 }
+                // if(actionHandleReturnsFalse) unableToDoAction1 = true;
+            }
         }
-         */
     }
+
+
+    if(p == _p2) std::reverse(_grid->getAllCases().begin(), _grid->getAllCases().end());
+
+    /* TODO : display all unit activities
+        eg : "Player1's F goes forward,
+              Player1's C attacks Player2's A,
+              Player2's A loses x PV"
+    */
 }
 
 void Game::initializeGame(int gridSize) {

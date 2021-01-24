@@ -58,7 +58,7 @@ public:
      * \brief Phases de résolution des actions 1, 2 et 3 du joueur \p p
      * \param une instance de Player représentant le joueur qui joue.
      */
-    void resolveActions(Player p);
+    void resolveActions(Player* p);
 
     const std::pair<Player, Player> &getPlayers() const;
 

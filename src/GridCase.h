@@ -9,6 +9,7 @@
 
 #include <vector>
 #include "Troup.h"
+#include "Player.h"
 
 /**
  * \class GridCase
@@ -50,6 +51,10 @@ public:
      * \return Une chaine de caractère correspondant au type de l'unité placée sur la case.
      */
     std::string getTroupName(bool isShort = false);
+
+    Player* getUnitOwner() { return _unit->getOwner(); };
+
+    Action getUnitAction(int phase) { return _unit->getAction(phase); };
 };
 
 #endif //CLIAGEOFWAR_GRIDCASE_H

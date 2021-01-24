@@ -12,6 +12,8 @@
 #include <vector>
 #include <map>
 
+class Player;
+
 /**
  * \enum Action
  * \brief enumeration representant les différentes action possibles pour une unité
@@ -34,6 +36,7 @@ protected:
     int _damage;
     std::vector<std::vector<int>> _reach;
     std::map<int, Action> _actions;
+    Player* _owner;
 
 public:
     /**
@@ -55,6 +58,10 @@ public:
      * \return Une chaine de caractère correspondant au type de l'unité placée sur la case.
      */
     virtual std::string getName(bool isShort = false) = 0;
+
+    Player* getOwner() { return _owner; };
+
+    Action getAction(int phase) { return _actions.at(phase); };
 };
 
 

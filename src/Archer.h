@@ -21,7 +21,7 @@ public:
     /**
      * \brief Constructeur de la classe Archer
      */
-    Archer();
+    Archer(Player* player);
     /**
      * \brief Destructeur de la classe Archer
      */
