@@ -10,8 +10,8 @@
 #include <iostream>
 #include "Console.h"
 #include "Troup.h"
-#include "GridCase.h"
 
+class GridCase;
 class HomeCase;
 
 /**
@@ -75,13 +75,27 @@ public:
      */
     bool isKO();
 
+    /**
+     * \fn canPlaceTroup
+     * \brief Fonction permettant de vérifier si la base du joueur n'est pas déjà occupée.
+     * \return true si l'emplacement est vide, false sinon.
+     */
     bool canPlaceTroup();
 
+
+    /**
+     * \fn placeTroupOnHomeCase
+     * \brief Fonction qui place une unité sur la base du joueur.
+     * \param troup Pointeur sur l'unité à placer.
+     */
     bool placeTroupOnHomeCase(Troup* troup);
 
     GridCase& getHomeCase();
 
     int getCoins() const;
+
+    // Don't seems to be useful :
+    // inline bool operator==(const X& lhs, const X& rhs){ return ...; }
 };
 
 

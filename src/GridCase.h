@@ -9,6 +9,7 @@
 
 #include <vector>
 #include "Troup.h"
+#include "Player.h"
 
 /**
  * \class GridCase
@@ -26,13 +27,38 @@ public:
 private:
     bool _filled;
 public:
+    /**
+     * \brief Constructeur de la classe GridCase
+     * \param position Entier représentant la position occupée par la case sur le plateau de jeu.
+     */
     GridCase(int position = 0);
 
+    /**
+     * \fn placeUnit
+     * \brief Fonction qui place si possible l'unité souhaitée sur la case.
+     * \param unit Pointeur sur l'unité à placer.
+     * \return true si l'opération a réussi, false sinon.
+     */
     bool placeUnit(Troup* unit);
+
+    /**
+     * \fn isEmpty
+     * \brief Renvoie l'état d'occupation de la case.
+     * \return true si la case est vide, false sinon.
+     */
     bool isEmpty();
 
-
+    /**
+     * \fn getTroupName
+     * \brief Renvoie le nom de l'unité qui occupe la case.
+     * \param isShort Booléen optionnel permettant d'obtenir le nom réduit à un caractère.
+     * \return Une chaine de caractère correspondant au type de l'unité placée sur la case.
+     */
     std::string getTroupName(bool isShort = false);
+
+    Player* getUnitOwner() { return _unit->getOwner(); };
+
+    Action getUnitAction(int phase) { return _unit->getAction(phase); };
 };
 
 #endif //CLIAGEOFWAR_GRIDCASE_H

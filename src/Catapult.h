@@ -21,7 +21,7 @@ public:
     /**
      * \brief Constructeur de la classe Catapult
      */
-    Catapult();
+    Catapult(Player* player);
     /**
      * \brief Destructeur de la classe Catapult
      */

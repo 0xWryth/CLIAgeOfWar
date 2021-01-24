@@ -7,17 +7,22 @@ class Game {
     - int _earnings
     - int _currentTurn
     - string _consoleHeader
+    __
     - void initializeGame()
     - void displayPlayer()
+    ..
     + Game(int gridSize, int maxTurnLimit, int earnings)
     + void turn()
     + void play(Player p)
+    + void resolveActions(Player p)
     + <Player, Player>& getPlayers()
     + Console getConsole()
 }
 class Console {
     - map<Panel, vector<string>> _panels
+    __
     - int getMaxChar()
+    ..
     + Console()
     + void addToPanel(string toAppend, Panel position)
     + void display()
@@ -28,21 +33,27 @@ abstract class Troup {
     # int _nbPiece
     # int _damage
     # int** _reach
+    # Player* _owner
+    # map<int, Action> _actions
     + int getCost()
     + int getDamage()
+    + Player* getOwner()
+    + Action getAction(int phase)
+    + {abstract} string getName(bool isShort)
 }
 class Grid {
     - int _gridSize
-    + Grid(const int gridSize)
-    + void setGame(Game* game)
+    + Grid(const int gridSize, Game* game)
     + void display()
     + int getGridSize()
+    + vector<GridCase*>& getAllCases()
 }
 class GridCase {
     - int position
     + GridCase(int position)
     + bool placeUnit(Troup* unit)
     + bool isEmpty()
+    + string getTroupName(bool isShort)
 }
 class HomeCase {
 }
@@ -54,7 +65,7 @@ abstract class Health {
 class Fantassin
 class SuperSoldier
 class Archer
-class Catalpult
+class Catapult
 class Player {
     - string _playerName
     - int _playerId
@@ -69,6 +80,9 @@ class Player {
     + void incrementCoins(int coins)
     + void decrementCoins(int coins)
     + bool isKO()
+    + bool canPlaceTroup()
+    + void placeTroupOnHomeCase(Troup* troup)
+    + GridCase* getHomeCase()
 }
 enum Panel {
   Top
@@ -76,11 +90,16 @@ enum Panel {
   Right
   Bottom
 }
+enum Action {
+  Attack
+  MoveForward
+  None
+}
 
 Troup <|-- Fantassin
 Troup <|-- SuperSoldier
 Troup <|-- Archer
-Troup <|-- Catalpult
+Troup <|-- Catapult
 GridCase <|-- HomeCase
 Health <|-- Troup
 Health <|-- HomeCase

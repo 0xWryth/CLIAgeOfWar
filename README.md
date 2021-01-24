@@ -6,7 +6,7 @@ Advanced C++ project - Polytech ET4 IT - Noted for S7 (2020-2021)
 
 ## Asked work
 
-- [Game rules and project subject](./Projet_C++_TP.pdf) :fr:
+- [Game rules and project subject](./doc/Projet_C++_TP.pdf) :fr:
 
 All remaining bugs and unimplemented features are listed [here](https://github.com/0xWryth/CLIAgeOfWar/issues).
 
@@ -55,17 +55,20 @@ To do this, each player can create a unit on the square of his base once per rou
 * The unit can then advance, attack other units or the opposing base.
 * Depending on its type, a unit costs a certain amount of gold coins, has a certain range, health and attack points.
 * On each turn, players earn 8 gold coins.
-* For more subtle rules (how to obtain super-soldier, how to earn extra gold from combat, ...) please refer to the [subject](./Projet_C++_TP.pdf).
+* For more subtle rules (how to obtain super-soldier, how to earn extra gold from combat, ...) please refer to the [subject](./doc/Projet_C++_TP.pdf).
 
 ---
 
 ### Authors
 
-* **Lucas B.** - *Code structure, console display, ...* - @0xWryth
-* **Antonin D.** - *Documentation, input processing, ...* - @adepreis
+* **Lucas B.** - *Code structure, console display, input processing, ...* - @0xWryth
+* **Antonin D.** - *Documentation, input processing, action resolution phases...* - @adepreis
 
 ---
 
 ## Documentation
 
 In the `/doc` folder, you can find a brief report that explains the design choices and which contains the class diagram, screenshots...
+
+
+![Illustration : UML](./doc/tempoUML_Class_Diagram.png)
