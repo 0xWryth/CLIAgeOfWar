@@ -18,14 +18,10 @@
  * La classe stocke sa position et la possible unité placée dessus.
  */
 class GridCase {
-private:
     int _position;
     Troup* _unit;
-public:
-    Troup *getUnit() const;
-
-private:
     bool _filled;
+
 public:
     /**
      * \brief Constructeur de la classe GridCase
@@ -55,6 +51,8 @@ public:
      * \return Une chaine de caractère correspondant au type de l'unité placée sur la case.
      */
     std::string getTroupName(bool isShort = false);
+
+    Troup *getUnit() const;
 
     Player* getUnitOwner() { return _unit->getOwner(); };
 

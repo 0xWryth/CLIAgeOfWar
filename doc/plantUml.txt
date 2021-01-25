@@ -1,6 +1,6 @@
 @startuml
 
-title UML - Projet C++
+title UML - Projet C++ CLIAgeOfWar
 
 class Game {
     - int _maxTurnLimit
@@ -8,15 +8,14 @@ class Game {
     - int _currentTurn
     - string _consoleHeader
     __
-    - void initializeGame()
+    - void initializeGame(int gridSize)
     - void displayPlayer()
     ..
     + Game(int gridSize, int maxTurnLimit, int earnings)
     + void turn()
-    + void play(Player p)
-    + void resolveActions(Player p)
-    + <Player, Player>& getPlayers()
-    + Console getConsole()
+    + void play(Player* p)
+    + void resolveActions(Player* p)
+    + Console& getConsole()
 }
 class Console {
     - map<Panel, vector<string>> _panels
@@ -30,10 +29,9 @@ class Console {
     + string prompt(string message)
 }
 abstract class Troup {
-    # int _nbPiece
+    # int _cost
     # int _damage
-    # int** _reach
-    # Player* _owner
+    # vector<vector<int> _reach
     # map<int, Action> _actions
     + int getCost()
     + int getDamage()
@@ -43,38 +41,48 @@ abstract class Troup {
 }
 class Grid {
     - int _gridSize
-    + Grid(const int gridSize, Game* game)
-    + void display()
+    + Grid(const int gridSize, Player& p1, Player& p2)
+    + void display(Console& console, Player& p1, Player& p2)
     + int getGridSize()
     + vector<GridCase*>& getAllCases()
 }
 class GridCase {
     - int position
+    - bool _filled
     + GridCase(int position)
     + bool placeUnit(Troup* unit)
     + bool isEmpty()
     + string getTroupName(bool isShort)
+    + Troup* getUnit()
+    + Player* getUnitOwner()
+    + Action getUnitAction(int phase)
 }
 class HomeCase {
+    + HomeCase(int position)
 }
 abstract class Health {
     # int _initialHealth
     # int _currentHealth
     + int getCurrentHealth()
 }
-class Fantassin
+class Fantassin {
+    Fantassin(Player* player)
+}
+class Archer {
+    Archer(Player* player)
+}
+class Catapult {
+    Catapult(Player* player)
+}
 class SuperSoldier
-class Archer
-class Catapult
 class Player {
     - string _playerName
     - int _playerId
     - int _coins
     - {static} int _playerNumber
-    + Player()
+    + Player(HomeCase &homeCase)
     + string displayStr()
     + void initialize(Console console)
-    + void setHomeCase(HomeCase* homeCase)
     + string getFirstLetter()
     + string getName()
     + void incrementCoins(int coins)
@@ -82,7 +90,8 @@ class Player {
     + bool isKO()
     + bool canPlaceTroup()
     + void placeTroupOnHomeCase(Troup* troup)
-    + GridCase* getHomeCase()
+    + GridCase& getHomeCase()
+    + int getCoins()
 }
 enum Panel {
   Top
@@ -106,10 +115,12 @@ Health <|-- HomeCase
 
 Game "1" -- "1" Grid : _grid
 Game "1" -- "1" Console : _console
+Game "1" -- "1" Player : _p1
+Game "1" -- "1" Player : _p2
 Player "1" -- "1" HomeCase : _playerHome
-Grid "1"  -- "2..*" GridCase : _cases
-GridCase "1"  -- "0..1" Troup : _troup
+Grid "1"  -- "2..*" GridCase : _gridCases
+GridCase "1"  -- "0..1" Troup : _unit
+Troup "1"  -- "1" Player : _owner
 Player "0..1"  -- "0..*" GridCase : _playerTroups
-Player "2"  -- "1" Game : _players
 
 @enduml

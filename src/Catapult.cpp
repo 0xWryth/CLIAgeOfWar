@@ -16,8 +16,8 @@ Catapult::Catapult(Player* player) {
                                          { 3, 4 } };
 
     _actions[1] = Action::Attack;
-    _actions[2] = Action::MoveForward;
-    _actions[3] = Action::None;
+    _actions[2] = Action::None;
+    _actions[3] = Action::MoveForward;
 
     _owner = player;
 }

@@ -20,7 +20,6 @@ class Grid;
  * status des joueurs et le stockage des informations relatives à la partie courante.
  */
 class Game {
-private:
     int _maxTurnLimit;
     int _earnings;
     int _currentTurn;
@@ -31,6 +30,7 @@ private:
     std::string _consoleHeader;
     void initializeGame(int gridSize);
     void displayPlayer();
+
 public:
     /**
      * \brief Constructeur de la classe Game
@@ -59,8 +59,6 @@ public:
      * \param une instance de Player représentant le joueur qui joue.
      */
     void resolveActions(Player* p);
-
-    const std::pair<Player, Player> &getPlayers() const;
 
     Console &getConsole();
 };

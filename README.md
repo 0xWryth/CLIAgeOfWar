@@ -69,6 +69,3 @@ To do this, each player can create a unit on the square of his base once per rou
 ## Documentation
 
 In the `/doc` folder, you can find a brief report that explains the design choices and which contains the class diagram, screenshots...
-
-
-![Illustration : UML](./doc/tempoUML_Class_Diagram.png)

@@ -21,12 +21,12 @@ class HomeCase;
  * La classe gère l'initialisation, l'affichage et le stockage des informations liées au Joueur.
  */
 class Player {
-private:
     std::string _playerName;
     int _playerId;
-    static int _playerNumber;
     int _coins;
+    static int _playerNumber;
     HomeCase& _homeCase;
+
 public:
     /**
      * \brief Constructeur de la classe Player
@@ -81,7 +81,6 @@ public:
      * \return true si l'emplacement est vide, false sinon.
      */
     bool canPlaceTroup();
-
 
     /**
      * \fn placeTroupOnHomeCase

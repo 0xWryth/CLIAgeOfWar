@@ -143,16 +143,14 @@ void Game::resolveActions(Player* p) {
             if (!(*it)->isEmpty() && (*it)->getUnitOwner() == p) {
                 switch((*it)->getUnitAction(phase)) {
                     case Action::Attack:
-                        // handle Attack action : if(!(*it+range)->isEmpty()) ... elif(Fantassin || Catapult)) !unableToDoAction1
+                        // perform Attack action if(!(*it+range)->isEmpty()) ... elif(Fantassin || Catapult)) !unableToDoAction1
                         std::cout << "Unit "<< (*it)->getTroupName() << " attacks !" << std::endl;
                         break;
                     case Action::MoveForward:
-                        // handle MoveForward action : if(canReach) ... elif(Fantassin || Catapult)) !unableToDoAction1
+                        // perform MoveForward action if(!finPlateau && caseEmpty) ... else { cout << "Cant go forward" }
                         std::cout << "Unit "<< (*it)->getTroupName() << " moves forward !" << std::endl;
                         break;
-                    case Action::None:
-                        // handle None action
-                        break;
+                    case Action::None: // no handling needed
                     default:
                         break;
                 }

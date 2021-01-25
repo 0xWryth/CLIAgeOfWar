@@ -21,9 +21,9 @@ class Game;
  * La classe gère l'initialisation et le stockage des paramètres de la grille du jeu.
  */
 class Grid {
-private:
     int _gridSize;
     std::vector<GridCase*> _gridCases;
+
 public:
     /**
      * \brief Constructeur de la classe Grid

@@ -4,7 +4,6 @@
 // TODO: Make Health class abstract
 
 class Health {
-private:
 protected:
     int _initialHealth;
     int _currentHealth;
