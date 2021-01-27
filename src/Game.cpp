@@ -39,13 +39,12 @@ void Game::turn() {
         play(_p2);
 
         _currentTurn++;
-//    } while(_currentTurn <= _maxTurnLimit  // max turn exceeded or no winner
-//            && !_players.first.isKO()
-//            && !_players.second.isKO() );
-    } while(true);
+    } while(_currentTurn <= _maxTurnLimit  // max turn exceeded or no winner
+            && !_p1->isKO()
+            && !_p2->isKO() );
 
     if(_currentTurn >= _maxTurnLimit)
-        std::cout << "End of the game, the maximum number of turn is reached.";
+        std::cout << "End of the game, the maximum number of turn is reached."; // Name a winner anyway?
     else if(_p1->isKO())
         std::cout << "End of the game, " << _p1->getName() << "'s base is KO !";
     else
@@ -67,45 +66,48 @@ void Game::play(Player* p) {
     std::string playerAction = "";
 
     do {
-        playerAction = _console.prompt("Unit to create (see \"Help\" section) :");
-
-        if(playerAction.size() == 1) {
+        if (!p->canPlaceTroup()) {
+            std::cout << "You can't recruit a troup now because your base is occupied." << std::endl;
+            playerAction = _console.prompt("(Press 'Enter' to skip unit creation)", true);
+            playerAction = "P";
+        }
+        else {
             // If homecase is not filled
-            if (p->canPlaceTroup()) {
-                Troup *newTroup = NULL;
-                switch (std::toupper(playerAction.at(0))) { // or .front()
-                    case 'F':
-                        newTroup = new Fantassin(p);
-                        //_grid->debug();
-                        break;
-                    case 'A':
-                        newTroup = new Archer(p);
-                        break;
-                    case 'C':
-                        newTroup = new Catapult(p);
-                        break;
-                    case 'P':   // pass new unit creation
-                        playerAction = "P";
-                        break;
-                    default:
-                        // deal with default :
-                        playerAction = "";
-                }
-                if (newTroup != NULL) {
-                    if (p->getCoins() > newTroup->getCost()) {
-                        p->placeTroupOnHomeCase(newTroup);
-                    }
-                    else {
-                        std::cout << "You do not have enough money for this action." << std::endl;
-                        playerAction = "";
-                    }
-                }
+
+            playerAction = _console.prompt("Unit to create (see \"Help\" section) :");
+        }
+
+        if (playerAction.size() == 1) {
+            Troup *newTroup = NULL;
+            switch (std::toupper(playerAction.at(0))) { // or .front()
+                case 'F':
+                    newTroup = new Fantassin(p);
+                    //_grid->debug();
+                    break;
+                case 'A':
+                    newTroup = new Archer(p);
+                    break;
+                case 'C':
+                    newTroup = new Catapult(p);
+                    break;
+                case 'P':   // pass new unit creation
+                    playerAction = "P";
+                    break;
+                default:
+                    // deal with default :
+                    playerAction = "";
             }
-            else {
-                playerAction = " ";
+            if (newTroup != NULL) {
+                if (p->getCoins() > newTroup->getCost()) {
+                    p->placeTroupOnHomeCase(newTroup);
+                }
+                else {
+                    std::cout << "You do not have enough money for this action." << std::endl;
+                    playerAction = "";
+                }
             }
         }
-    } while(playerAction.size() != 1);
+    } while (playerAction.size() != 1);
 
 }
 

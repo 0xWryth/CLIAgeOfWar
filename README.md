@@ -55,7 +55,8 @@ To do this, each player can create a unit on the square of his base once per rou
 * The unit can then advance, attack other units or the opposing base.
 * Depending on its type, a unit costs a certain amount of gold coins, has a certain range, health and attack points.
 * On each turn, players earn 8 gold coins.
-* For more subtle rules (how to obtain super-soldier, how to earn extra gold from combat, ...) please refer to the [subject](./doc/Projet_C++_TP.pdf).
+
+For more subtle rules (how to obtain super-soldier, how to earn extra gold from combat, ...) please refer to the [subject](./doc/Projet_C++_TP.pdf).
 
 ---
 
@@ -68,4 +69,12 @@ To do this, each player can create a unit on the square of his base once per rou
 
 ## Documentation
 
-In the `/doc` folder, you can find a brief report that explains the design choices and which contains the class diagram, screenshots...
+In the `/doc` folder, you can find a brief [report](./doc/Rapport_CLIAgeOfWar.pdf) that explains the design choices and which contains the class diagram, screenshots...
+
+If you have installed [doxygen](https://www.doxygen.nl/manual/install.html), you can also generate the HTML documentation with :
+
+`doxygen doc/Doxyfile` (at the project's root)
+
+and view it by pointing a HTML browser to the `index.html` file located in the `doc/doxygen` output directory.
+
+Otherwise, the most recent release also includes the generated documentation.

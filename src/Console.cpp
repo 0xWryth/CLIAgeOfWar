@@ -70,13 +70,20 @@ void Console::clear() {
     }
 }
 
-std::string Console::prompt(std::string message) const {
+std::string Console::prompt(std::string message, bool ignore) const {
     std::cout << message << std::endl;
 
-    std::string res;
-    std::cin >> res;
+    if (ignore)
+    {
+       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    return res;
+       return "";
+    } else {
+        std::string res;
+        std::cin >> res;
+        
+        return res;
+    }
 }
 
 void Console::addToPanel(const std::string toAppend, Panel position) {

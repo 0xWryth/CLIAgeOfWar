@@ -1,6 +1,5 @@
 #include "Player.h"
 
-
 // Placed here to avoid forward issue, good idea ?
 #include "HomeCase.h"
 

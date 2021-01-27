@@ -8,6 +8,7 @@
  */
 
 #include <iostream>
+#include <limits>
 #include <vector>
 #include <map>
 #include "Panel.h"
@@ -51,9 +52,10 @@ public:
      * \fn prompt
      * \brief Fonction qui engage l'utilisateur à renseigner une valeur dans l'entrée standard.
      * \param message Chaine de caractère correspondant au texte guidant l'utilisateur.
+     * \param ignore Booléen optionnel indiquant que la valeur entrée n'a pas d'importance.
      * \return Valeur entrée par l'utilisateur (sous forme de chaine de caractère).
      */
-    std::string prompt(std::string message) const;
+    std::string prompt(std::string message, bool ignore = false) const;
 };
 
 

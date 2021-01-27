@@ -26,7 +26,7 @@ class Console {
     + void addToPanel(string toAppend, Panel position)
     + void display()
     + void clear()
-    + string prompt(string message)
+    + string prompt(string message, bool ignore)
 }
 abstract class Troup {
     # int _cost

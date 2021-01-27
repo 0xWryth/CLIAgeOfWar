@@ -7,7 +7,6 @@
  * \version 0.1
  */
 
-#include <iostream>
 #include "Console.h"
 #include "Troup.h"
 
