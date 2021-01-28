@@ -160,7 +160,7 @@ std::string Game::resolveActions(Player* p) {
 
                         if ((p == _p1 && casePosition >= this->_grid->getGridSize() - 1 - 1) ||
                             (p == _p2 && casePosition <= 1) ||
-                            !this->_grid->getAllCases()[casePosition + moveDirection]->isEmpty()) {
+                            !this->_grid->find(casePosition + moveDirection)->isEmpty()) {
                             res += "Unit " + (*it)->getTroupName() + " can not go forward !"
                                     + std::to_string(casePosition) +
                                     std::to_string(this->_grid->getGridSize() - 1)
