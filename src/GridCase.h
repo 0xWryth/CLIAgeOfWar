@@ -56,7 +56,11 @@ public:
 
     Player* getUnitOwner() { return _unit->getOwner(); };
 
-    Action getUnitAction(int phase) { return _unit->getAction(phase); };
+    Action getUnitAction(int phase) { return _unit->getAction(phase); }
+
+    int getPosition() const;
+
+    void transferTroupToCase(GridCase* gridCase);
 };
 
 #endif //CLIAGEOFWAR_GRIDCASE_H

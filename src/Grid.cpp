@@ -64,3 +64,14 @@ void Grid::debug() {
         std::cout << _gridCases[i]->isEmpty() << std::endl;
     }
 }
+
+GridCase *Grid::find(int position) {
+    GridCase* res = NULL;
+    for (int i = 0; i < _gridSize; i++) {
+        if (_gridCases[i]->getPosition() == position) {
+            res = _gridCases[i];
+        }
+    }
+
+    return res;
+}

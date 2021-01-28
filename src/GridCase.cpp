@@ -29,3 +29,12 @@ std::string GridCase::getTroupName(bool isShort) {
 Troup *GridCase::getUnit() const {
     return _unit;
 }
+
+int GridCase::getPosition() const {
+    return _position;
+}
+
+void GridCase::transferTroupToCase(GridCase* gridCase) {
+    gridCase->placeUnit(this->getUnit());
+    this->_filled = false;
+}

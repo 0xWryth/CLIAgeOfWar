@@ -141,25 +141,47 @@ std::string Game::resolveActions(Player* p) {
            TODO : handle unit range
          */
 
+        bool moved = false;
+
         for (std::vector<GridCase*>::iterator it = _grid->getAllCases().begin();
              it != _grid->getAllCases().end();
              it++)
         {
-            if (!(*it)->isEmpty() && (*it)->getUnitOwner() == p) {
+            if (!moved && !(*it)->isEmpty() && (*it)->getUnitOwner() == p) {
                 switch((*it)->getUnitAction(phase)) {
                     case Action::Attack:
                         // perform Attack action if(!(*it+range)->isEmpty()) ... elif(Fantassin || Catapult)) !unableToDoAction1
                          "Unit " + (*it)->getTroupName() + " attacks !" + "\n";
                         break;
-                    case Action::MoveForward:
-                        // perform MoveForward action if(!finPlateau && caseEmpty) ... else { cout << "Cant go forward" }
-                        res += "Unit " + (*it)->getTroupName() + " moves forward !" + "\n";
+                    case Action::MoveForward: {
+                        int casePosition = (*it)->getPosition();
+
+                        int moveDirection = p == _p1 ? 1 : -1;
+
+                        if ((p == _p1 && casePosition >= this->_grid->getGridSize() - 1 - 1) ||
+                            (p == _p2 && casePosition <= 1) ||
+                            !this->_grid->getAllCases()[casePosition + moveDirection]->isEmpty()) {
+                            res += "Unit " + (*it)->getTroupName() + " can not go forward !"
+                                    + std::to_string(casePosition) +
+                                    std::to_string(this->_grid->getGridSize() - 1)
+                                    + "\n";
+                        } else {
+                            (*it)->transferTroupToCase(_grid->find(casePosition + moveDirection));
+                            moved = true;
+
+                            res += "Unit " + (*it)->getTroupName() + " moves forward !" + "\n";
+                        }
+
                         break;
+                    }
                     case Action::None: // no handling needed
                     default:
                         break;
                 }
                 // if(actionHandleReturnsFalse) unableToDoAction1 = true;
+            }
+            else if (moved) {
+                moved = false;
             }
         }
     }

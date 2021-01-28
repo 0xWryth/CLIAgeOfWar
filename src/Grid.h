@@ -51,6 +51,8 @@ public:
     std::vector<GridCase*>& getAllCases() { return _gridCases; };
 
     void debug();
+
+    GridCase* find(int position);
 };
 
 
