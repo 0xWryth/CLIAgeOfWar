@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <algorithm>
 
 // Placed here to avoid forward issue, good idea ?
 #include "HomeCase.h"
@@ -13,7 +14,18 @@ Player::Player(HomeCase &homeCase) : _homeCase(homeCase) {
 }
 
 std::string Player::displayStr() {
-    return "  " + _playerName + ": " + std::to_string(_coins) + " coins";
+    std::string name = _playerName;
+    if (_playerId == 0) {
+        std::for_each(name.begin(), name.end(), [](char & c) {
+            c = ::toupper(c);
+        });
+    }
+    else {
+        std::for_each(name.begin(), name.end(), [](char & c) {
+            c = ::tolower(c);
+        });
+    }
+    return "  " + name + ": " + std::to_string(_coins) + " coins";
 }
 
 void Player::initialize(const Console console) {

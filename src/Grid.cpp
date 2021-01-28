@@ -1,4 +1,5 @@
 #include "Grid.h"
+#include <algorithm>
 
 Grid::Grid(const int gridSize, Player& p1, Player& p2) {
     _gridSize = gridSize;
@@ -26,7 +27,19 @@ void Grid::display(Console& console, Player& p1, Player& p2) {
         topLine += "+---";
 
         bool isEmpty = _gridCases[i]->isEmpty();
-        middleLine += isEmpty ? "|   " : "| " + _gridCases[i]->getTroupName(true) + " ";
+        if (isEmpty) {
+            middleLine += "|   ";
+        }
+        else {
+            std::string name = _gridCases[i]->getTroupName(true);
+            if (_gridCases[i]->getUnitOwner() == &p2) {
+                std::for_each(name.begin(), name.end(), [](char & c) {
+                    c = ::tolower(c);
+                });
+            }
+
+            middleLine += "| " + name + " ";
+        }
 
         int life = isEmpty ? 0 : _gridCases[i]->getUnit()->getCurrentHealth();
         std::string lifeInfo = life >= 10 ? std::to_string(life) : (std::to_string(life) + " ");
