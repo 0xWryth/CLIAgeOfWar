@@ -31,12 +31,12 @@ void Game::turn() {
         _p1->incrementCoins(_earnings);
         _p2->incrementCoins(_earnings);
 
-        resolveActions(_p1);
+        std::string actions = resolveActions(_p1);
         // TODO: if player 1 wins, exit before P1 unit creation and P2 turn (?)
-        play(_p1);
+        play(_p1, actions);
 
-        resolveActions(_p2);
-        play(_p2);
+        actions = resolveActions(_p2);
+        play(_p2, actions);
 
         _currentTurn++;
     } while(_currentTurn <= _maxTurnLimit  // max turn exceeded or no winner
@@ -51,7 +51,7 @@ void Game::turn() {
         std::cout << "End of the game, " << _p2->getName() << "'s base is KO !";
 }
 
-void Game::play(Player* p) {
+void Game::play(Player* p, std::string actionStr) {
     _console.clear();
     _console.addToPanel(_consoleHeader, Panel::Top);
     displayPlayer();
@@ -62,6 +62,8 @@ void Game::play(Player* p) {
     _console.addToPanel(whosTurn, Panel::Bottom);
 
     _console.display();
+    
+    std::cout << actionStr << std::endl;
 
     std::string playerAction = "";
 
@@ -82,7 +84,6 @@ void Game::play(Player* p) {
             switch (std::toupper(playerAction.at(0))) { // or .front()
                 case 'F':
                     newTroup = new Fantassin(p);
-                    //_grid->debug();
                     break;
                 case 'A':
                     newTroup = new Archer(p);
@@ -111,7 +112,9 @@ void Game::play(Player* p) {
 
 }
 
-void Game::resolveActions(Player* p) {
+std::string Game::resolveActions(Player* p) {
+    std::string res = "";
+
     bool unableToDoAction1 = false;
 
     // The following action handling loop is made for the left player
@@ -129,8 +132,8 @@ void Game::resolveActions(Player* p) {
          if(phase == PHASE_1 || phase == PHASE_2) std::reverse(_grid->getAllCases().begin(), _grid->getAllCases().end());
 
 
-        std::cout << "Resolution des actions " << phase << " du joueur " << p->getName()
-                  << ", unableToDoAction1=" << unableToDoAction1 << std::endl;
+        res += "Resolution des actions " + std::to_string(phase) + " du joueur " + p->getName()
+                            + ", unableToDoAction1=" + std::to_string(unableToDoAction1) + "\n";
 
         /* TODO : handle action limitations during 3rd phase :
             restrict to (unableToDoAction1 && (Fantassin || Catapult)) || SuperSoldier)
@@ -146,11 +149,11 @@ void Game::resolveActions(Player* p) {
                 switch((*it)->getUnitAction(phase)) {
                     case Action::Attack:
                         // perform Attack action if(!(*it+range)->isEmpty()) ... elif(Fantassin || Catapult)) !unableToDoAction1
-                        std::cout << "Unit "<< (*it)->getTroupName() << " attacks !" << std::endl;
+                         "Unit " + (*it)->getTroupName() + " attacks !" + "\n";
                         break;
                     case Action::MoveForward:
                         // perform MoveForward action if(!finPlateau && caseEmpty) ... else { cout << "Cant go forward" }
-                        std::cout << "Unit "<< (*it)->getTroupName() << " moves forward !" << std::endl;
+                        res += "Unit " + (*it)->getTroupName() + " moves forward !" + "\n";
                         break;
                     case Action::None: // no handling needed
                     default:
@@ -169,6 +172,8 @@ void Game::resolveActions(Player* p) {
               Player1's C attacks Player2's A,
               Player2's A loses x PV"
     */
+
+    return res;
 }
 
 void Game::initializeGame(int gridSize) {
