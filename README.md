@@ -40,6 +40,7 @@ or
 
 to delete the executable file and all the object files from the directory before.
 
+Executable file accepts params : `./out/main[.exe] [mode] [gridSize] [maxTurn] [earning] [path]`
 
 ### How to play
 

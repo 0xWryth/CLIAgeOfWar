@@ -10,6 +10,7 @@
 
 int param(int argc, char *argv[], int number, int defaultValue) {
     if (argc >= number + 1) {
+        // TODO: traiter les exceptions éventuellement levées par std::stoi
         int value = std::stoi(argv[number]);
         if (value < 0) {
             return defaultValue;
@@ -49,7 +50,8 @@ int main(int argc, char *argv[]) {
         return -4;
     }
 
-    int maxTurnLimit = param(argc, argv, 3, 10);
+    int maxTurnLimit = param(argc, argv, 3, 100);
+
     int earning = param(argc, argv, 4, 8);
     if (earning == 0) {
         std::cout << "Earning cannot be 0." << std::endl;
