@@ -60,6 +60,11 @@ public:
 
     int getPosition() const;
 
+    /**
+     * \fn transferTroupToCase
+     * \brief Place l'unité courante sur une autre case.
+     * \param gridCase Pointeur vers la case où placer l'unité courante.
+     */
     void transferTroupToCase(GridCase* gridCase);
 };
 

@@ -151,18 +151,20 @@ std::string Game::resolveActions(Player* p) {
                 int moveDirection = p == _p1 ? 1 : -1;
 
                 switch((*it)->getUnitAction(phase)) {
-                    case Action::Attack:
+                    case Action::Attack: {
                         // perform Attack action
-                        if(!_grid->find(casePosition + moveDirection)->isEmpty()) {
-                            // TODO : handle unit range
-                            // TODO : handle base in front
-                            res += "\tUnit " + (*it)->getTroupName() + " attacks opponent's " +
-                                _grid->find(casePosition + moveDirection)->getTroupName() + " !" + "\n";
+                        GridCase* target = (*it)->getUnit()->canAttack(_grid, casePosition, moveDirection);
+                        if(target != nullptr) {
+                           res += (*it)->getUnit()->attack(_grid, target);
+
+                            // if(!_grid->find(casePosition + moveDirection)->isEmpty()) {
+
                         } else {
                             // if(PHASE_1 && Fantassin) unableToDoAction1 = true;
                             std::cout << "Personne a attaquer..." << std::endl;
                         }
                         break;
+                    }
                     case Action::MoveForward: {
                         if ((p == _p1 && casePosition >= this->_grid->getGridSize() - 1 - 1) ||
                             (p == _p2 && casePosition <= 1) ||

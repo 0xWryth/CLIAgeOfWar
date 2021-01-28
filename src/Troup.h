@@ -13,6 +13,8 @@
 #include <map>
 
 class Player;
+class GridCase;
+class Grid;
 
 /**
  * \enum Action
@@ -62,6 +64,25 @@ public:
     Player* getOwner() { return _owner; };
 
     Action getAction(int phase) { return _actions.at(phase); };
+
+    /**
+     * \fn canAttack
+     * \brief Fonction abstraite censée renvoyer le nom de l'unité qui occupe la case.
+     * \param grid Pointeur vers le plateau de jeu.
+     * \param casePosition
+     * \param moveDirection
+     * \return Un pointeur vers la case à cibler.
+     */
+    GridCase* canAttack(Grid* grid, int casePosition, int moveDirection);
+
+    /**
+     * \fn attack
+     * \brief Fonction abstraite censée renvoyer le nom de l'unité qui occupe la case.
+     * \param grid Pointeur vers le plateau de jeu.
+     * \param target Un pointeur vers la case à cibler.
+     * \return Une chaine de caractère correspondant au type de l'unité placée sur la case.
+     */
+    std::string attack(Grid* grid, GridCase* target);
 };
 
 
