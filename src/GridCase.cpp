@@ -38,3 +38,20 @@ void GridCase::transferTroupToCase(GridCase* gridCase) {
     gridCase->placeUnit(this->getUnit());
     this->_filled = false;
 }
+
+bool GridCase::suffersAttack(int damage) {
+    if (_filled) {
+        _unit->removeHealth(damage);
+
+        if (_unit->getCurrentHealth() <= 0) {
+            _unit = NULL;
+            _filled = false; // free case
+            return true;  // unit is dead
+        }
+
+        return false;  // unit is not dead
+    } else {
+        std::cout << "attaque sur une case vide !" << std::endl;
+        return false; // should not be reached but..
+    }
+}

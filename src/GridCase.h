@@ -60,7 +60,20 @@ public:
 
     int getPosition() const;
 
+    /**
+     * \fn transferTroupToCase
+     * \brief Place l'unité courante sur une autre case.
+     * \param gridCase Pointeur vers la case où placer l'unité courante.
+     */
     void transferTroupToCase(GridCase* gridCase);
+
+    /**
+     * \fn suffersAttack
+     * \brief Retranche le nombre de points de vie indiqué en paramètre à la troupe courante.
+     * \param damage Entier correspondant au dégats infligés.
+     * \return true si la troupe est abattue, false sinon.
+     */
+    bool suffersAttack(int damage);
 };
 
 #endif //CLIAGEOFWAR_GRIDCASE_H

@@ -37,6 +37,8 @@ abstract class Troup {
     + int getDamage()
     + Player* getOwner()
     + Action getAction(int phase)
+    + GridCase* canAttack(Grid* grid, int casePosition, int moveDirection)
+    + string attack(Grid* grid, GridCase* target)
     + {abstract} string getName(bool isShort)
 }
 class Grid {
@@ -45,6 +47,7 @@ class Grid {
     + void display(Console& console, Player& p1, Player& p2)
     + int getGridSize()
     + vector<GridCase*>& getAllCases()
+    + GridCase* find(int position)
 }
 class GridCase {
     - int position
@@ -56,14 +59,18 @@ class GridCase {
     + Troup* getUnit()
     + Player* getUnitOwner()
     + Action getUnitAction(int phase)
+    + void transferTroupToCase(GridCase* gridCase)
+    + bool suffersAttack(int damage)
 }
 class HomeCase {
     + HomeCase(int position)
+    + bool suffersAttack(int damage)
 }
 abstract class Health {
     # int _initialHealth
     # int _currentHealth
     + int getCurrentHealth()
+    + void removeHealth(int damage)
 }
 class Fantassin {
     Fantassin(Player* player)

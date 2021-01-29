@@ -132,14 +132,8 @@ std::string Game::resolveActions(Player* p) {
          if(phase == PHASE_1 || phase == PHASE_2) std::reverse(_grid->getAllCases().begin(), _grid->getAllCases().end());
 
 
-        res += "Resolution des actions " + std::to_string(phase) + " du joueur " + p->getName()
-                            + ", unableToDoAction1=" + std::to_string(unableToDoAction1) + "\n";
+        res += p->getName() + "'s actions resolution phase " + std::to_string(phase) + " unable=" + std::to_string(unableToDoAction1) + "\n";
 
-        /* TODO : handle action limitations during 3rd phase :
-            restrict to (unableToDoAction1 && (Fantassin || Catapult)) || SuperSoldier)
-
-           TODO : handle unit range
-         */
 
         bool moved = false;
 
@@ -147,21 +141,35 @@ std::string Game::resolveActions(Player* p) {
              it != _grid->getAllCases().end();
              it++)
         {
+            /* TODO : handle action limitations during 3rd phase : restrict to
+                if(unableToDoAction1 && (Fantassin || Catapult)) || SuperSoldier)
+                    continue;
+             */
             if (!moved && !(*it)->isEmpty() && (*it)->getUnitOwner() == p) {
+                int casePosition = (*it)->getPosition();
+
+                int moveDirection = p == _p1 ? 1 : -1;
+
                 switch((*it)->getUnitAction(phase)) {
-                    case Action::Attack:
-                        // perform Attack action if(!(*it+range)->isEmpty()) ... elif(Fantassin || Catapult)) !unableToDoAction1
-                         "Unit " + (*it)->getTroupName() + " attacks !" + "\n";
+                    case Action::Attack: {
+                        // perform Attack action
+                        GridCase* target = (*it)->getUnit()->canAttack(_grid, casePosition, moveDirection);
+                        if(target != nullptr) {
+                           res += (*it)->getUnit()->attack(_grid, target);
+
+                            // if(!_grid->find(casePosition + moveDirection)->isEmpty()) {
+
+                        } else {
+                            // if(PHASE_1 && Fantassin) unableToDoAction1 = true;
+                            std::cout << "Personne a attaquer..." << std::endl;
+                        }
                         break;
+                    }
                     case Action::MoveForward: {
-                        int casePosition = (*it)->getPosition();
-
-                        int moveDirection = p == _p1 ? 1 : -1;
-
                         if ((p == _p1 && casePosition >= this->_grid->getGridSize() - 1 - 1) ||
                             (p == _p2 && casePosition <= 1) ||
                             !this->_grid->find(casePosition + moveDirection)->isEmpty()) {
-                            res += "Unit " + (*it)->getTroupName() + " can not go forward !"
+                            res += "\tUnit " + (*it)->getTroupName() + " can not go forward !"
                                     + std::to_string(casePosition) +
                                     std::to_string(this->_grid->getGridSize() - 1)
                                     + "\n";
@@ -169,7 +177,7 @@ std::string Game::resolveActions(Player* p) {
                             (*it)->transferTroupToCase(_grid->find(casePosition + moveDirection));
                             moved = true;
 
-                            res += "Unit " + (*it)->getTroupName() + " moves forward !" + "\n";
+                            res += "\tUnit " + (*it)->getTroupName() + " moves forward !" + "\n";
                         }
 
                         break;

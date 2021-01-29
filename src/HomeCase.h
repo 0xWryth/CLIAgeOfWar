@@ -23,6 +23,11 @@ public:
      * \param position Entier représentant la position occupée par la base sur le plateau de jeu.
      */
     HomeCase(int position);
+
+    /**
+     * \copydoc GridCase::suffersAttack(int damage)
+     */
+    bool suffersAttack(int damage);
 };
 
 

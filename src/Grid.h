@@ -52,6 +52,12 @@ public:
 
     void debug();
 
+    /**
+     * \fn find
+     * \brief Renvoie la case pointant à l'indice demandé.
+     * \param position Entier correspondant à l'index de la case demandée.
+     * \return Un pointeur vers la case recherchée.
+     */
     GridCase* find(int position);
 };
 
