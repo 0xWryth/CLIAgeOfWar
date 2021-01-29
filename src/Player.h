@@ -88,7 +88,7 @@ public:
      */
     bool placeTroupOnHomeCase(Troup* troup);
 
-    GridCase& getHomeCase();
+    HomeCase& getHomeCase();
 
     int getCoins() const;
 

@@ -49,7 +49,7 @@ bool Player::placeTroupOnHomeCase(Troup *troup) {
     return _homeCase.placeUnit(troup);
 }
 
-GridCase& Player::getHomeCase() {
+HomeCase& Player::getHomeCase() {
     return _homeCase;
 }
 

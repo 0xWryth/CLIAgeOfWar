@@ -13,16 +13,22 @@ Grid::Grid(const int gridSize, Player& p1, Player& p2) {
 }
 
 void Grid::display(Console& console, Player& p1, Player& p2) {
-    std::string res = "  " + p1.getFirstLetter() + "  ";
+    std::string res = "      " + p1.getFirstLetter() + "  ";
     res += std::string(4 * (_gridSize - 2) - 1, ' ');
     res += "  " + p2.getFirstLetter();
 
     console.addToPanel(res, Panel::Left);
 
-    std::string topLine = "";
-    std::string middleLine = "";
-    std::string lifeLine = "";
-    std::string bottomLine = "";
+    int lifeH1 = p1.getHomeCase().getCurrentHealth();
+    std::string lifeH1Str = lifeH1 >= 10 ? (std::to_string(lifeH1) + " ") : (std::to_string(lifeH1) + "  ");
+
+    int lifeH2 = p2.getHomeCase().getCurrentHealth();
+    std::string lifeH2Str = lifeH2 >= 10 ? (" " + std::to_string(lifeH2)) : ( "  " + std::to_string(lifeH2));
+
+    std::string topLine = "    ";
+    std::string middleLine = lifeH1Str;
+    std::string lifeLine = "    ";
+    std::string bottomLine = "    ";
     for (int i = 0; i < _gridSize; ++i) {
         topLine += "+---";
 
@@ -49,7 +55,7 @@ void Grid::display(Console& console, Player& p1, Player& p2) {
         bottomLine += "  " + numberToString + std::string(numberToString.length() == 1 ? 1 : 0,' ' );
     }
     topLine += "+";
-    middleLine += "|";
+    middleLine += "|" + lifeH2Str;
     lifeLine += "|";
 
     console.addToPanel(topLine, Panel::Left);
