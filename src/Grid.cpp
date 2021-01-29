@@ -20,7 +20,8 @@ void Grid::display(Console& console, Player& p1, Player& p2) {
     console.addToPanel(res, Panel::Left);
 
     int lifeH1 = p1.getHomeCase().getCurrentHealth();
-    std::string lifeH1Str = lifeH1 >= 10 ? (std::to_string(lifeH1) + " ") : (std::to_string(lifeH1) + "  ");
+    std::string lifeH1Str = lifeH1 >= 100 ? (std::to_string(lifeH1) + " ") :
+            lifeH1 >= 10 ? (" " + std::to_string(lifeH1) + " ") : ("  " + std::to_string(lifeH1) + " ");
 
     int lifeH2 = p2.getHomeCase().getCurrentHealth();
     std::string lifeH2Str = lifeH2 >= 10 ? (" " + std::to_string(lifeH2)) : ( "  " + std::to_string(lifeH2));
