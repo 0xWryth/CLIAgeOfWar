@@ -60,14 +60,17 @@ class GridCase {
     + Player* getUnitOwner()
     + Action getUnitAction(int phase)
     + void transferTroupToCase(GridCase* gridCase)
+    + bool suffersAttack(int damage)
 }
 class HomeCase {
     + HomeCase(int position)
+    + bool suffersAttack(int damage)
 }
 abstract class Health {
     # int _initialHealth
     # int _currentHealth
     + int getCurrentHealth()
+    + void removeHealth(int damage)
 }
 class Fantassin {
     Fantassin(Player* player)

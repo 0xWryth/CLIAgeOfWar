@@ -14,6 +14,7 @@
 
 class Player;
 class GridCase;
+class HomeCase;
 class Grid;
 
 /**

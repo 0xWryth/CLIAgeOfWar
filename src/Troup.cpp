@@ -28,15 +28,25 @@ GridCase* Troup::canAttack(Grid* grid, int casePosition, int moveDirection) {
 std::string Troup::attack(Grid* grid, GridCase* target) {
     std::string description = "";
 
-    // TODO : handle PV
     // TODO : handle "multiple victims" if this==Catapult (/!\ border limits)
     // TODO : handle "soldier promotion"
 
+    // target name is comptuted before in case of target death later ("NPE" risk)
     std::string targetName = (target->getPosition() == 0 || target->getPosition() == grid->getGridSize()-1) // is a base
-                                ? "base"
+                                ? target->isEmpty()
+                                    ? "base"
+                                    : target->getTroupName()
                                 : target->getTroupName();
 
-    description += "\tUnit " + this->getName() + " attacks opponent's " + targetName + " !" + "\n";
+    bool targetIsDead = target->isEmpty()
+                        ? ((HomeCase*)target)->suffersAttack(_damage)
+                        : target->suffersAttack(_damage);
+
+    std::string attackResult = targetIsDead // is a base
+                             ? " kills "
+                             : " attacks ";
+
+    description += "\tUnit " + this->getName() + attackResult + "opponent's " + targetName + " !" + "\n";
 
     return description;
 }

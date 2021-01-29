@@ -33,8 +33,9 @@ public:
     /**
      * \fn removeHealth
      * \brief Retranche le nombre de points de vie indiqué en paramètre.
+     * \param damage Entier correspondant au dégats infligés.
      */
-    void removeHealth(int damage) { _currentHealth = std::max(0, _currentHealth - damage) ; };
+    void removeHealth(int damage);
 };
 
 

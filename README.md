@@ -63,8 +63,8 @@ For more subtle rules (how to obtain super-soldier, how to earn extra gold from 
 
 ### Authors
 
-* **Lucas B.** - *Code structure, console display, input processing, ...* - @0xWryth
-* **Antonin D.** - *Documentation, input processing, action resolution phases...* - @adepreis
+* **Lucas B.** - *Code structure, console display, input processing, move during resolution phases...* - @0xWryth
+* **Antonin D.** - *Documentation, input processing, attack during resolution phases...* - @adepreis
 
 ---
 
@@ -78,4 +78,4 @@ If you have installed [doxygen](https://www.doxygen.nl/manual/install.html), you
 
 and view it by pointing a HTML browser to the `index.html` file located in the `doc/doxygen` output directory.
 
-Otherwise, the most recent release also includes the generated documentation.
+Otherwise, the most recent [release](https://github.com/0xWryth/CLIAgeOfWar/releases) also includes the generated documentation.
